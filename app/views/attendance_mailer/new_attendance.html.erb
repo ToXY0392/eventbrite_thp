@@ -1,0 +1,15 @@
+<h1>Nouvelle inscription à ton événement 🎫</h1>
+
+<p>
+  Bonjour <%= @admin.first_name || @admin.email %>,
+</p>
+
+<p>
+  <%= @participant.first_name || @participant.email %> vient de s'inscrire
+  à ton événement "<%= @event.title %>".
+</p>
+
+<p>
+  Date : <%= @event.start_date %><br>
+  Lieu : <%= @event.location %>
+</p>

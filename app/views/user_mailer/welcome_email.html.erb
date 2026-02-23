@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Salut <%= @user.first_name || @user.email %>, bienvenue sur Eventbrite THP 🎉</h1>
+
+    <p>
+      Tu t'es inscrit avec l'adresse : <%= @user.email %>.
+    </p>
+
+    <p>
+      Tu pourras te connecter plus tard via : <%= @url %>.
+    </p>
+
+    <p>À bientôt sur le site.</p>
+  </body>
+</html>
