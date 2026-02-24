@@ -6,14 +6,16 @@ A Rails application to manage events like Eventbrite.
 
 - 💎 Ruby 3.4.2
 - 🐘 PostgreSQL 9.3+
-- 📦 Node.js (for the asset pipeline)
+- 📦 Node.js (optional for the asset pipeline)
 
-**Main dependencies (see Gemfile):**
+**Main technologies:**
 - 🚂 Rails 8.1
-- 📧 Mailer support (Gmail, Stripe integration)
-- 🎨 Stimulus JS & Turbo Rails
-- 🔧 **Faker (gem)** - seed data generation
-- 🐛 **Better Errors (gem)** - enhanced error pages with interactive debugging
+- 🔐 **Devise** – authentication (sign up, sign in, password recovery)
+- 📱 **PWA** – Progressive Web App (Rails 8 native)
+- 🎨 **Bootstrap 5** – UI and navbar
+- 📧 **Mailer** – emails (letter_opener in dev for preview)
+- 🔧 **Faker** – test data in French
+- 🐛 **Better Errors** – error pages with interactive debugging
 
 ## ⚙️ Installation
 
@@ -43,39 +45,52 @@ The application will be accessible at `http://localhost:3000`
 
 ## 📝 Project Steps to Complete
 
-Follow these steps to build the Eventbrite application:
+Steps to complete the **Eventbrite: Devise, PWA and first views** exercise:
 
-1. **Create Models**
-   - `User` : Store user information and authentication
-   - `Event` : Store event details (title, description, date, location)
-   - `Attendance` : Link users to events (many-to-many relationship)
+### 1. **Devise & PWA**
+- Install Devise: `rails g devise:install` then `rails g devise User`
+- Enable PWA: uncomment in `config/routes.rb` and `application.html.erb` the manifest/service-worker lines
+- Configure `config.action_mailer.default_url_options` in `development.rb`
+- Migrate: `rails db:migrate`
 
-2. **Set Up Database Migrations**
-   - Create tables for users, events, and attendances
-   - Add proper associations and validations
+### 2. **Bootstrap & Navbar**
+- Integrate Bootstrap 5 (CDN or importmap)
+- Create a navbar with:
+  - Home (events list)
+  - Create event
+  - Profile dropdown: My profile, Edit account, Sign out (when logged in)
+  - Account dropdown: Sign up, Sign in (when logged out)
+- Use `button_to` with `method: :delete` for sign out (avoid GET /users/sign_out conflict)
 
-3. **Build Controllers and Routes**
-   - Implement RESTful routes for events
-   - Create attendance management endpoints
-   - Set up user authentication
+### 3. **Main pages**
+- **Home page** (`events#index`): events list, create link, jumbotron style
+- **Profile page** (`users#show`): user info, created events, "Edit email/password" link, `authenticate_user!` + ensure user only sees their own profile
+- **Event page** (`events#show`): title, description, dates, location, price, attendees count, organizer
+- **Create page** (`events#new`): form (title, description, start_date, duration, price, location), `authenticate_user!`, associate admin
 
-4. **Create Views**
-   - Event listing page
-   - Event detail page
-   - User registration and login
-   - Attendance management interface
+### 4. **Join an event**
+- Create `AttendancesController` with `create` action
+- Nest routes: `resources :events do resources :attendances, only: [:create] end`
+- Add `uniqueness` validation on `[user_id, event_id]` in Attendance model
+- "Join event" button on show page (when logged in and not yet registered)
+- Email to organizer on sign-up (AttendanceMailer)
 
-5. **Implement Mailers**
-   - Send confirmation emails when user attends an event
-   - Send event update notifications
+### 5. **Edit / Delete an event**
+- Add `edit`, `update`, `destroy` actions in `EventsController`
+- `before_action :ensure_event_admin` – only the organizer can edit/delete
+- Edit and Delete buttons on `events#show` (visible only to admin)
+- Confirmation before deletion (`data: { turbo_confirm: "..." }`)
 
-6. **Add Validations & Business Logic**
-   - Validate user and event inputs
-   - Handle edge cases (duplicate attendance, etc.)
 
-7. **Test Your Application**
-   - Run `rails test` to execute test suite
-   - Test all models, controllers, and mailers
+
+### 6. **Technical details**
+- Route constraint for users: `constraints: { id: /\d+/ }` to avoid `/users/sign_out` matching
+- Use `datetime_local_field` instead of `datetime_select` (avoids I18n errors with month_names)
+- Add Devise `signed_up` translation at `registrations.signed_up` level
+
+### 8. **Seed & test**
+- `rails db:seed` – generates users (password: password123) and French events
+- Test: sign up, sign in, create event, join, edit, delete
 
 ## 🏗️ Architecture
 
@@ -85,7 +100,7 @@ Follow these steps to build the Eventbrite application:
 - 🎭 **Assets** : Stylesheets and JavaScript
 
 
-## �🗄️ Database
+## 🗄️ Database
 
 The project uses PostgreSQL with configuration in `config/database.yml`.
 

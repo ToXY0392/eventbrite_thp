@@ -4,7 +4,11 @@ fr:
     title: Eventbrite THP
     flash:
       event_created: L'événement a bien été créé.
+      event_updated: L'événement a été modifié.
+      event_destroyed: L'événement a été supprimé.
+      event_forbidden: Vous ne pouvez pas modifier ou supprimer cet événement.
       profile_forbidden: Vous n'avez pas accès à ce profil.
+      attendance_created: Vous êtes inscrit à cet événement !
     account_dropdown: S'inscrire / Se connecter
     nav:
       home: Accueil
@@ -42,6 +46,15 @@ fr:
         duration_minutes: minutes
         unknown: Inconnu
         back: Retour aux événements
+        edit_btn: Modifier l'événement
+        delete_btn: Supprimer l'événement
+        delete_confirm: Êtes-vous sûr de vouloir supprimer cet événement ?
+        join_btn: Rejoindre l'événement
+        already_joined: Vous êtes inscrit à cet événement
+        sign_in_to_join: pour vous inscrire à cet événement.
+      edit:
+        title: Modifier l'événement
+        submit: Enregistrer les modifications
     users:
       show:
         first_name_default: Prénom
@@ -107,6 +120,38 @@ fr:
       long: "%A %d %B %Y à %H:%M"
 
   activerecord:
+    errors:
+      messages:
+        accepted: doit être accepté(e)
+        blank: doit être rempli(e)
+        confirmation: ne concorde pas avec %{attribute}
+        empty: doit être rempli(e)
+        equal_to: doit être égal à %{count}
+        even: doit être pair
+        exclusion: n'est pas disponible
+        greater_than: doit être supérieur à %{count}
+        greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+        in: doit être dans l'intervalle %{count}
+        inclusion: n'est pas inclus(e) dans la liste
+        invalid: n'est pas valide
+        less_than: doit être inférieur à %{count}
+        less_than_or_equal_to: doit être inférieur ou égal à %{count}
+        not_a_number: n'est pas un nombre
+        not_an_integer: doit être un nombre entier
+        odd: doit être impair
+        other_than: doit être différent de %{count}
+        present: doit être vide
+        required: doit exister
+        taken: est déjà utilisé(e)
+        too_long:
+          one: est trop long (pas plus d'un caractère)
+          other: est trop long (pas plus de %{count} caractères)
+        too_short:
+          one: est trop court (au moins un caractère)
+          other: est trop court (au moins %{count} caractères)
+        wrong_length:
+          one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+          other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
     attributes:
       user:
         confirmation_sent_at: Date d'envoi de la confirmation
@@ -177,6 +222,7 @@ fr:
       updated: Votre mot de passe a bien été modifié.
     registrations:
       destroyed: Au revoir ! Votre compte a bien été supprimé.
+      signed_up: Bienvenue ! Vous vous êtes bien enregistré(e).
       edit:
         cancel_my_account: Supprimer mon compte
         title: Éditer %{resource}

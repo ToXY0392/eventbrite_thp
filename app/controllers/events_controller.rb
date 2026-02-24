@@ -1,12 +1,13 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_event_admin, only: [:edit, :update, :destroy]
 
   def index
     @events = Event.order(start_date: :asc)
   end
 
   def show
-    @event = Event.find(params[:id])
     @attendees_count = @event.attendances.count
   end
 
@@ -25,7 +26,31 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event, notice: t("app.flash.event_updated")
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to root_path, notice: t("app.flash.event_destroyed")
+  end
+
   private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def ensure_event_admin
+    redirect_to root_path, alert: t("app.flash.event_forbidden") unless current_user == @event.admin
+  end
 
   def event_params
     params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location)

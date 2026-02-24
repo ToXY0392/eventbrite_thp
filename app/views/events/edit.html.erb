@@ -1,9 +1,7 @@
-<%
-  event = @event.is_a?(Event) ? @event : Event.new
-%>
+<% event = @event %>
 <div class="row">
   <div class="col-md-8 offset-md-2">
-    <h1 class="h3 mb-4"><%= t("app.events.new.title") %></h1>
+    <h1 class="h3 mb-4"><%= t("app.events.edit.title") %></h1>
 
     <%= form_with model: event, local: true do |f| %>
       <% if event.respond_to?(:errors) && event.errors.any? %>
@@ -48,8 +46,8 @@
       </div>
 
       <div class="d-flex gap-2">
-        <%= f.submit t("app.events.new.submit"), class: "btn btn-primary" %>
-        <%= link_to t("app.events.new.cancel"), root_path, class: "btn btn-outline-secondary" %>
+        <%= f.submit t("app.events.edit.submit"), class: "btn btn-primary" %>
+        <%= link_to t("app.events.new.cancel"), event_path(event), class: "btn btn-outline-secondary" %>
       </div>
     <% end %>
   </div>
