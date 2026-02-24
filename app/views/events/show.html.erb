@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-8 mb-4">
+    <h1 class="h3 mb-3"><%= @event.title %></h1>
+
+    <p class="mb-3">
+      <%= simple_format(@event.description) %>
+    </p>
+
+    <ul class="list-unstyled mb-3">
+      <li>
+        <strong><%= t("app.events.labels.start_date") %> :</strong>
+        <%= l(@event.start_date, format: :long) rescue @event.start_date %>
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.duration") %> :</strong>
+        <%= @event.duration %> <%= t("app.events.show.duration_minutes") %>
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.end_date") %> :</strong>
+        <%= l(@event.end_date, format: :long) rescue @event.end_date.strftime("%Y-%m-%d %H:%M") %>
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.location") %> :</strong>
+        <%= @event.location %>
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.price") %> :</strong>
+        <%= @event.price %> €
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.attendees") %> :</strong>
+        <%= @attendees_count %>
+      </li>
+      <li>
+        <strong><%= t("app.events.labels.admin") %> :</strong>
+        <%= @event.admin&.email || t("app.events.show.unknown") %>
+      </li>
+    </ul>
+
+    <%= link_to t("app.events.show.back"), root_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>

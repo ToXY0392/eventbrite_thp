@@ -1,0 +1,198 @@
+# Locale française
+fr:
+  app:
+    title: Eventbrite THP
+    flash:
+      event_created: L'événement a bien été créé.
+      profile_forbidden: Vous n'avez pas accès à ce profil.
+    account_dropdown: S'inscrire / Se connecter
+    nav:
+      home: Accueil
+      create_event: Créer un événement
+      profile: Mon profil
+      edit_account: Modifier mon compte
+      sign_out: Se déconnecter
+      account: Compte
+      sign_up: S'inscrire
+      sign_in: Se connecter
+    events:
+      index:
+        title: Événements dans votre ville
+        subtitle: Bienvenue sur Eventbrite THP. Créez des événements, participez, amusez-vous.
+        create_btn: Créer un nouvel événement
+        upcoming: Prochains événements
+        empty: Aucun événement pour le moment. Soyez le premier à en créer un !
+      labels:
+        date: Date
+        price: Prix
+        location: Lieu
+        start_date: Date de début
+        duration: Durée (minutes)
+        end_date: Date de fin
+        attendees: Inscrits
+        admin: Organisateur
+      new:
+        title: Créer un nouvel événement
+        submit: Créer l'événement
+        cancel: Annuler
+        error_count:
+          one: "1 erreur a empêché la création"
+          other: "%{count} erreurs ont empêché la création"
+      show:
+        duration_minutes: minutes
+        unknown: Inconnu
+        back: Retour aux événements
+    users:
+      show:
+        first_name_default: Prénom
+        last_name_default: Nom
+        email: Email
+        description: Description
+        description_default: Aucune description pour le moment.
+        edit_password: Modifier l'email / mot de passe
+        events_created: Événements créés
+        no_events: Vous n'avez pas encore créé d'événement.
+
+  date:
+    day_names:
+      - dimanche
+      - lundi
+      - mardi
+      - mercredi
+      - jeudi
+      - vendredi
+      - samedi
+    abbr_day_names:
+      - dim
+      - lun
+      - mar
+      - mer
+      - jeu
+      - ven
+      - sam
+    month_names:
+      - ~
+      - janvier
+      - février
+      - mars
+      - avril
+      - mai
+      - juin
+      - juillet
+      - août
+      - septembre
+      - octobre
+      - novembre
+      - décembre
+    abbr_month_names:
+      - ~
+      - janv.
+      - févr.
+      - mars
+      - avr.
+      - mai
+      - juin
+      - juil.
+      - août
+      - sept.
+      - oct.
+      - nov.
+      - déc.
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A %d %B %Y"
+  time:
+    formats:
+      default: "%H:%M"
+      long: "%A %d %B %Y à %H:%M"
+
+  activerecord:
+    attributes:
+      user:
+        confirmation_sent_at: Date d'envoi de la confirmation
+        confirmation_token: Clé de confirmation du mot de passe
+        confirmed_at: Date de confirmation
+        created_at: Date d'enregistrement
+        current_password: Mot de passe actuel
+        current_sign_in_at: Date de la connexion actuelle
+        current_sign_in_ip: IP de la connexion actuelle
+        email: Email
+        encrypted_password: Mot de passe chiffré
+        failed_attempts: Tentatives échouées
+        last_sign_in_at: Date de la dernière connexion
+        last_sign_in_ip: IP de la dernière connexion
+        locked_at: Verrouillé à
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        remember_created_at: Mémorisé à
+        remember_me: Se souvenir de moi ?
+        reset_password_sent_at: Clé de réinitialisation créée à
+        reset_password_token: Clé de réinitialisation du mot de passe
+        sign_in_count: Nombre des connexions
+        unconfirmed_email: Email non confirmé
+        unlock_token: Clé de déverrouillage
+        updated_at: Date de mise à jour
+      event:
+        title: Titre
+        description: Description
+        start_date: Date de début
+        duration: Durée
+        price: Prix
+        location: Lieu
+    models:
+      user: Utilisateur
+      event: Événement
+
+  devise:
+    confirmations:
+      confirmed: Votre compte a bien été confirmé.
+      new:
+        resend_confirmation_instructions: Renvoyer les instructions de confirmation
+        send_instructions: Vous allez recevoir sous quelques minutes un email comportant des instructions pour confirmer votre compte.
+    failure:
+      already_authenticated: Vous êtes déjà connecté(e).
+      inactive: Votre compte n'est pas encore activé.
+      invalid: "%{authentication_keys} ou mot de passe incorrect."
+      locked: Votre compte est verrouillé.
+      not_found_in_database: "%{authentication_keys} ou mot de passe incorrect."
+      timeout: Votre session est expirée, veuillez vous reconnecter pour continuer.
+      unauthenticated: Vous devez vous connecter ou vous enregistrer pour continuer.
+      unconfirmed: Vous devez confirmer votre compte par email.
+    mailer:
+      confirmation_instructions:
+        subject: Instructions de confirmation
+      password_change:
+        subject: Mot de passe modifié
+      reset_password_instructions:
+        subject: Instructions pour changer le mot de passe
+    passwords:
+      edit:
+        change_my_password: Changer mon mot de passe
+        change_your_password: Changer votre mot de passe
+        confirm_new_password: Confirmez votre nouveau mot de passe
+        new_password: Nouveau mot de passe
+      new:
+        forgot_your_password: Mot de passe oublié ?
+        send_me_reset_password_instructions: Envoyez-moi des instructions pour réinitialiser mon mot de passe
+      updated: Votre mot de passe a bien été modifié.
+    registrations:
+      destroyed: Au revoir ! Votre compte a bien été supprimé.
+      edit:
+        cancel_my_account: Supprimer mon compte
+        title: Éditer %{resource}
+        update: Modifier
+      new:
+        sign_up: Inscription
+        signed_up: Bienvenue ! Vous vous êtes bien enregistré(e).
+      updated: Votre compte a bien été modifié.
+    sessions:
+      new:
+        sign_in: Connexion
+      signed_in: Connecté(e).
+      signed_out: Déconnecté(e).
+    shared:
+      links:
+        back: Retour
+        forgot_your_password: Mot de passe oublié ?
+        sign_in: Connexion
+        sign_up: Inscription

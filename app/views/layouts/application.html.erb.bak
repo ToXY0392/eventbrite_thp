@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : t("app.title") %></title>
+    <title>Eventbrite THP</title>
     <meta charset="utf-8">
 
     <%= csrf_meta_tags %>
@@ -24,10 +24,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <%= link_to t("app.nav.home"), root_path, class: "nav-link" %>
+              <%= link_to "Home", root_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to t("app.nav.create_event"), new_event_path, class: "nav-link" %>
+              <%= link_to "Create Event", new_event_path, class: "nav-link" %>
             </li>
           </ul>
 
@@ -35,19 +35,19 @@
 
             <% if user_signed_in? %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><%= t("app.nav.profile") %></a>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profile</a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><%= link_to t("app.nav.profile"), user_path(current_user), class: "dropdown-item" %></li>
-                  <li><%= link_to t("app.nav.edit_account"), edit_user_registration_path, class: "dropdown-item" %></li>
-                  <li><%= link_to t("app.nav.sign_out"), destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
+                  <li><%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %></li>
+                  <li><%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
                 </ul>
               </li>
             <% else %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><%= t("app.account_dropdown") %></a>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Account</a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><%= link_to t("app.nav.sign_up"), new_user_registration_path, class: "dropdown-item" %></li>
-                  <li><%= link_to t("app.nav.sign_in"), new_user_session_path, class: "dropdown-item" %></li>
+                  <li><%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %></li>
+                  <li><%= link_to "Sign in", new_user_session_path, class: "dropdown-item" %></li>
                 </ul>
               </li>
             <% end %>
@@ -59,8 +59,6 @@
     </nav>
 
     <div class="container">
-      <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
-      <% if alert %><div class="alert alert-danger"><%= alert %></div><% end %>
       <%= yield %>
     </div>
 

@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
+  before_action :set_locale
+  before_action :configure_devise_params, if: :devise_controller?
 
-  # Action de test pour BetterErrors (affiche une erreur volontaire)
-  def test_error
-    raise "YOLO_TEST"
+  def set_locale
+    I18n.locale = :fr
   end
 
+  protected
+
+  def configure_devise_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :description])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :description])
+  end
 end

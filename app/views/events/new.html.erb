@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="h3 mb-4"><%= t("app.events.new.title") %></h1>
+
+    <%= form_with model: @event, local: true do |f| %>
+      <% if @event.errors.any? %>
+        <div class="alert alert-danger">
+          <p><strong><%= t("app.events.new.error_count", count: @event.errors.count) %> :</strong></p>
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= f.label :title, class: "form-label" %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :description, class: "form-label" %>
+        <%= f.text_area :description, rows: 5, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :start_date, t("app.events.labels.start_date"), class: "form-label" %>
+        <%= f.datetime_select :start_date, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :duration, t("app.events.labels.duration"), class: "form-label" %>
+        <%= f.number_field :duration, class: "form-control", min: 5, step: 5 %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :price, t("app.events.labels.price") + " (€)", class: "form-label" %>
+        <%= f.number_field :price, class: "form-control", min: 1, max: 1000 %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :location, t("app.events.labels.location"), class: "form-label" %>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
+
+      <div class="d-flex gap-2">
+        <%= f.submit t("app.events.new.submit"), class: "btn btn-primary" %>
+        <%= link_to t("app.events.new.cancel"), root_path, class: "btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

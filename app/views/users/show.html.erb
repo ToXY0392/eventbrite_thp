@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title h4 mb-3">
+          <%= @user.first_name.presence || t("app.users.show.first_name_default") %>
+          <%= @user.last_name.presence  || t("app.users.show.last_name_default")  %>
+        </h2>
+
+        <p class="mb-1">
+          <strong><%= t("app.users.show.email") %> :</strong> <%= @user.email %>
+        </p>
+
+        <p class="mb-3">
+          <strong><%= t("app.users.show.description") %> :</strong><br>
+          <%= @user.description.presence || t("app.users.show.description_default") %>
+        </p>
+
+        <hr>
+
+        <%= link_to t("app.users.show.edit_password"),
+                    edit_user_registration_path,
+                    class: "btn btn-outline-primary btn-sm" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 mb-4">
+    <h3 class="h5 mb-3"><%= t("app.users.show.events_created") %></h3>
+
+    <% if @created_events.any? %>
+      <div class="list-group">
+        <% @created_events.each do |event| %>
+          <%= link_to event_path(event), class: "list-group-item list-group-item-action" do %>
+            <h4 class="h6 mb-1"><%= event.title %></h4>
+            <small>
+              <strong><%= t("app.events.labels.date") %> :</strong> <%= l(event.start_date, format: :long) rescue event.start_date %> |
+              <strong><%= t("app.events.labels.price") %> :</strong> <%= event.price %> € |
+              <strong><%= t("app.events.labels.location") %> :</strong> <%= event.location %>
+            </small>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p><%= t("app.users.show.no_events") %></p>
+    <% end %>
+  </div>
+</div>

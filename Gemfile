@@ -15,6 +15,8 @@ gem "pg", "~> 1.5"
 # Pour générer de fausses données (seed)
 gem "faker"
 
+gem "devise"
+
 # Chargement auto des variables .env (Gmail, Stripe, etc.)
 gem "dotenv-rails", groups: [:development, :test]
 

@@ -36,6 +36,10 @@ class Event < ApplicationRecord
   validates :location,
             presence: true
 
+  def end_date
+    start_date + duration.minutes
+  end
+
   private
 
   def start_date_cannot_be_in_the_past
