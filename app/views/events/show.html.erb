@@ -37,28 +37,15 @@
       </li>
     </ul>
 
-    <% if user_signed_in? %>
-      <% if current_user == @event.admin %>
-        <div class="d-flex gap-2 mb-3">
-          <%= link_to t("app.events.show.edit_btn"), edit_event_path(@event), class: "btn btn-outline-primary" %>
-          <%= button_to t("app.events.show.delete_btn"),
-                        event_path(@event),
-                        method: :delete,
-                        data: { turbo_confirm: t("app.events.show.delete_confirm") },
-                        class: "btn btn-outline-danger" %>
-        </div>
-      <% elsif current_user.attended_events.include?(@event) %>
-        <p class="text-success mb-3"><%= t("app.events.show.already_joined") %></p>
-      <% else %>
-        <%= button_to t("app.events.show.join_btn"),
-                      event_attendances_path(@event),
-                      method: :post,
-                      class: "btn btn-primary mb-3" %>
-      <% end %>
-    <% else %>
-      <p class="mb-3">
-        <%= link_to t("app.nav.sign_in"), new_user_session_path %> <%= t("app.events.show.sign_in_to_join") %>
-      </p>
+    <% if user_signed_in? && current_user == @event.admin %>
+      <div class="d-flex gap-2 mb-3">
+        <%= link_to t("app.events.show.edit_btn"), edit_event_path(@event), class: "btn btn-outline-primary" %>
+        <%= button_to t("app.events.show.delete_btn"),
+                      event_path(@event),
+                      method: :delete,
+                      data: { turbo_confirm: t("app.events.show.delete_confirm") },
+                      class: "btn btn-outline-danger" %>
+      </div>
     <% end %>
 
     <%= link_to t("app.events.show.back"), root_path, class: "btn btn-outline-secondary" %>
