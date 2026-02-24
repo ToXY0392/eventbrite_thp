@@ -21,7 +21,7 @@ gem "devise"
 gem "dotenv-rails", groups: [:development, :test]
 
 # Serveur web conseillé pour Rails
-gem "puma", "~> 6.4"
+gem "puma", "~> 7.2"
 
 # Amélioration du temps de boot
 gem "bootsnap", require: false
