@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="h3 mb-4"><%= t("app.attendances.new.title") %></h1>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="h5 card-title"><%= @event.title %></h2>
+        <p class="card-text"><%= truncate(@event.description, length: 200) %></p>
+        <p class="mb-0">
+          <strong><%= t("app.events.labels.price") %> :</strong> <%= @event.price %> €
+        </p>
+      </div>
+    </div>
+
+    <%= button_to t("app.attendances.new.pay_btn"),
+                  event_attendance_checkout_path(@event),
+                  method: :post,
+                  data: { turbo: false },
+                  class: "btn btn-success btn-lg" %>
+
+    <%= link_to t("app.events.show.back"), @event, class: "btn btn-outline-secondary mt-3" %>
+  </div>
+</div>

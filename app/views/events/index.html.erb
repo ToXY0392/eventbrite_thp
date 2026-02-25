@@ -11,15 +11,7 @@
 <% if @events.any? %>
   <div class="list-group mb-4">
     <% @events.each do |event| %>
-      <%= link_to event_path(event), class: "list-group-item list-group-item-action" do %>
-        <h3 class="h5 mb-1"><%= event.title %></h3>
-        <p class="mb-1"><%= truncate(event.description, length: 120) %></p>
-        <small>
-          <strong><%= t("app.events.labels.date") %> :</strong> <%= l(event.start_date, format: :long) rescue event.start_date %> |
-          <strong><%= t("app.events.labels.price") %> :</strong> <%= event.price %> € |
-          <strong><%= t("app.events.labels.location") %> :</strong> <%= event.location %>
-        </small>
-      <% end %>
+      <%= render "events/event_card", event: event %>
     <% end %>
   </div>
 <% else %>

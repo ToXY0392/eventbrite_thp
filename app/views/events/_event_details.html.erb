@@ -1,0 +1,30 @@
+<ul class="list-unstyled mb-3">
+  <li>
+    <strong><%= t("app.events.labels.start_date") %> :</strong>
+    <%= l(event.start_date, format: :long) rescue event.start_date %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.duration") %> :</strong>
+    <%= event.duration %> <%= t("app.events.show.duration_minutes") %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.end_date") %> :</strong>
+    <%= l(event.end_date, format: :long) rescue event.end_date.strftime("%Y-%m-%d %H:%M") %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.location") %> :</strong>
+    <%= event.location %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.price") %> :</strong>
+    <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.attendees") %> :</strong>
+    <%= event.attendances.count %>
+  </li>
+  <li>
+    <strong><%= t("app.events.labels.admin") %> :</strong>
+    <%= event.admin&.email || t("app.events.show.unknown") %>
+  </li>
+</ul>

@@ -29,6 +29,7 @@ fr:
       labels:
         date: Date
         price: Prix
+        free: Gratuit
         location: Lieu
         start_date: Date de début
         duration: Durée (minutes)
@@ -52,9 +53,25 @@ fr:
         join_btn: Rejoindre l'événement
         already_joined: Vous êtes inscrit à cet événement
         sign_in_to_join: pour vous inscrire à cet événement.
+        admin_space: Mon espace événement
       edit:
         title: Modifier l'événement
         submit: Enregistrer les modifications
+    attendances:
+      new:
+        title: Inscription et paiement
+        pay_btn: Payer avec Stripe
+      index:
+        title: "Espace admin : %{event}"
+        participants: Participants
+        empty: Aucun participant pour le moment.
+      errors:
+        admin_cannot_join: L'organisateur ne peut pas s'inscrire à son propre événement.
+        already_joined: Vous êtes déjà inscrit à cet événement.
+        free_event: Cet événement est gratuit, utilisez le bouton Rejoindre sur la page de l'événement.
+        use_checkout: Pour les événements payants, utilisez le formulaire de paiement.
+        payment_failed: Le paiement a échoué ou a été annulé.
+        payment_canceled: Paiement annulé.
     users:
       show:
         first_name_default: Prénom

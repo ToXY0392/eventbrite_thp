@@ -7,15 +7,17 @@ A Rails application to manage events like Eventbrite.
 - 💎 Ruby 3.4.2
 - 🐘 PostgreSQL 9.3+
 - 📦 Node.js (optional for the asset pipeline)
+- 💳 Compte **Stripe** (clés de test pour le paiement)
 
 **Main technologies:**
 - 🚂 Rails 8.1
-- 🔐 **Devise** – authentication (sign up, sign in, password recovery)
+- 🔐 **Devise** – authentification (sign up, sign in, reset password)
+- 💳 **Stripe** – paiement en ligne (cartes bancaires)
 - 📱 **PWA** – Progressive Web App (Rails 8 native)
-- 🎨 **Bootstrap 5** – UI and navbar
-- 📧 **Mailer** – emails (letter_opener in dev for preview)
-- 🔧 **Faker** – test data in French
-- 🐛 **Better Errors** – error pages with interactive debugging
+- 🎨 **Bootstrap 5** – UI et navbar
+- 📧 **Mailer** – emails (letter_opener en dev pour prévisualisation)
+- 🔧 **Faker** – données de test en français
+- 🐛 **Better Errors** – pages d’erreur avec débogage interactif
 
 ## ⚙️ Installation
 
@@ -36,7 +38,13 @@ rails db:create
 rails db:migrate
 ```
 
-4. **Start the server**
+4. **Configure Stripe** (pour le paiement)
+```bash
+cp .env.example .env
+# Remplir .env avec vos clés Stripe (https://dashboard.stripe.com/test/apikeys)
+```
+
+5. **Start the server**
 ```bash
 bin/dev
 ```
@@ -45,52 +53,32 @@ The application will be accessible at `http://localhost:3000`
 
 ## 📝 Project Steps to Complete
 
-Steps to complete the **Eventbrite: Devise, PWA and first views** exercise:
+Steps to complete the **Eventbrite : Stripe et composants (partials)** exercise :
 
-### 1. **Devise & PWA**
-- Install Devise: `rails g devise:install` then `rails g devise User`
-- Enable PWA: uncomment in `config/routes.rb` and `application.html.erb` the manifest/service-worker lines
-- Configure `config.action_mailer.default_url_options` in `development.rb`
-- Migrate: `rails db:migrate`
+### 1. **Partials**
+- Extraire les molécules en partials (`_event_card`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`)
+- Réutiliser les partials dans index, show, new, edit, users#show
 
-### 2. **Bootstrap & Navbar**
-- Integrate Bootstrap 5 (CDN or importmap)
-- Create a navbar with:
-  - Home (events list)
-  - Create event
-  - Profile dropdown: My profile, Edit account, Sign out (when logged in)
-  - Account dropdown: Sign up, Sign in (when logged out)
-- Use `button_to` with `method: :delete` for sign out (avoid GET /users/sign_out conflict)
+### 2. **Stripe – Paiement**
+- Ajouter la gem `stripe` et `dotenv-rails`
+- Créer `config/initializers/stripe.rb` avec `Stripe.api_key = ENV["STRIPE_SECRET_KEY"]`
+- Créer `.env` avec `STRIPE_PUBLIC_KEY` et `STRIPE_SECRET_KEY` (clés sur https://dashboard.stripe.com/test/apikeys)
+- Flux paiement : bouton "Rejoindre" → `attendances#new` → `attendances#checkout` (Stripe Checkout) → `attendances#success` (création attendance + `stripe_customer_id`)
+- En cas d’annulation : redirection vers l’événement avec message d’erreur
 
-### 3. **Main pages**
-- **Home page** (`events#index`): events list, create link, jumbotron style
-- **Profile page** (`users#show`): user info, created events, "Edit email/password" link, `authenticate_user!` + ensure user only sees their own profile
-- **Event page** (`events#show`): title, description, dates, location, price, attendees count, organizer
-- **Create page** (`events#new`): form (title, description, start_date, duration, price, location), `authenticate_user!`, associate admin
+### 3. **Espace admin organisateur**
+- Lien "Mon espace événement" sur `events#show` (visible uniquement par l’organisateur)
+- `attendances#index` : liste des participants, boutons Modifier / Supprimer l’événement
+- `before_action :ensure_event_admin` pour restreindre l’accès
 
-### 4. **Join an event**
-- Create `AttendancesController` with `create` action
-- Nest routes: `resources :events do resources :attendances, only: [:create] end`
-- Add `uniqueness` validation on `[user_id, event_id]` in Attendance model
-- "Join event" button on show page (when logged in and not yet registered)
-- Email to organizer on sign-up (AttendanceMailer)
+### 4. **Bonus : Événements gratuits**
+- Autoriser `price == 0` dans le modèle Event
+- Méthode `is_free?` sur Event
+- Pour un événement gratuit : rejoindre directement (sans Stripe), participation créée immédiatement
 
-### 5. **Edit / Delete an event**
-- Add `edit`, `update`, `destroy` actions in `EventsController`
-- `before_action :ensure_event_admin` – only the organizer can edit/delete
-- Edit and Delete buttons on `events#show` (visible only to admin)
-- Confirmation before deletion (`data: { turbo_confirm: "..." }`)
-
-
-
-### 6. **Technical details**
-- Route constraint for users: `constraints: { id: /\d+/ }` to avoid `/users/sign_out` matching
-- Use `datetime_local_field` instead of `datetime_select` (avoids I18n errors with month_names)
-- Add Devise `signed_up` translation at `registrations.signed_up` level
-
-### 8. **Seed & test**
-- `rails db:seed` – generates users (password: password123) and French events
-- Test: sign up, sign in, create event, join, edit, delete
+### 5. **Seed & test**
+- `rails db:seed` – génère utilisateurs (password: password123) et événements en français
+- Tester : inscription, paiement Stripe (carte test 4242 4242 4242 4242), événement gratuit, espace admin
 
 ## 🏗️ Architecture
 
@@ -121,5 +109,5 @@ docker build -t eventbrite_thp .
 ## ✅ Testing
 
 ```bash
-rails test
+rails s
 ```

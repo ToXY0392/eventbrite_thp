@@ -20,6 +20,9 @@ gem "devise"
 # Chargement auto des variables .env (Gmail, Stripe, etc.)
 gem "dotenv-rails", groups: [:development, :test]
 
+# Paiement en ligne
+gem "stripe"
+
 # Serveur web conseillé pour Rails
 gem "puma", "~> 7.2"
 

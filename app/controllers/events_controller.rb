@@ -9,6 +9,9 @@ class EventsController < ApplicationController
 
   def show
     @attendees_count = @event.attendances.count
+    if params[:canceled] == "true"
+      flash.now[:alert] = t("app.attendances.errors.payment_canceled")
+    end
   end
 
   def new

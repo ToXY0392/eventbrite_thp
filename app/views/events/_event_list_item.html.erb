@@ -1,0 +1,8 @@
+<%= link_to event_path(event), class: "list-group-item list-group-item-action" do %>
+  <h4 class="h6 mb-1"><%= event.title %></h4>
+  <small>
+    <strong><%= t("app.events.labels.date") %> :</strong> <%= l(event.start_date, format: :long) rescue event.start_date %> |
+    <strong><%= t("app.events.labels.price") %> :</strong> <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %> |
+    <strong><%= t("app.events.labels.location") %> :</strong> <%= event.location %>
+  </small>
+<% end %>

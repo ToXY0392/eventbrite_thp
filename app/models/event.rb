@@ -29,12 +29,16 @@ class Event < ApplicationRecord
             presence: true,
             numericality: {
               only_integer: true,
-              greater_than_or_equal_to: 1,
+              greater_than_or_equal_to: 0,
               less_than_or_equal_to: 1000
             }
 
   validates :location,
             presence: true
+
+  def is_free?
+    price == 0
+  end
 
   def end_date
     start_date + duration.minutes

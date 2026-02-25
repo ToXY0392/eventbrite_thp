@@ -6,48 +6,35 @@
       <%= simple_format(@event.description) %>
     </p>
 
-    <ul class="list-unstyled mb-3">
-      <li>
-        <strong><%= t("app.events.labels.start_date") %> :</strong>
-        <%= l(@event.start_date, format: :long) rescue @event.start_date %>
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.duration") %> :</strong>
-        <%= @event.duration %> <%= t("app.events.show.duration_minutes") %>
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.end_date") %> :</strong>
-        <%= l(@event.end_date, format: :long) rescue @event.end_date.strftime("%Y-%m-%d %H:%M") %>
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.location") %> :</strong>
-        <%= @event.location %>
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.price") %> :</strong>
-        <%= @event.price %> €
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.attendees") %> :</strong>
-        <%= @attendees_count %>
-      </li>
-      <li>
-        <strong><%= t("app.events.labels.admin") %> :</strong>
-        <%= @event.admin&.email || t("app.events.show.unknown") %>
-      </li>
-    </ul>
+    <%= render "events/event_details", event: @event %>
 
-    <% if user_signed_in? && current_user == @event.admin %>
-      <div class="d-flex gap-2 mb-3">
-        <%= link_to t("app.events.show.edit_btn"), edit_event_path(@event), class: "btn btn-outline-primary" %>
-        <%= button_to t("app.events.show.delete_btn"),
-                      event_path(@event),
-                      method: :delete,
-                      data: { turbo_confirm: t("app.events.show.delete_confirm") },
-                      class: "btn btn-outline-danger" %>
-      </div>
-    <% end %>
+    <%= render "events/event_admin_buttons", event: @event %>
 
-    <%= link_to t("app.events.show.back"), root_path, class: "btn btn-outline-secondary" %>
+    <div class="d-flex flex-wrap gap-2 align-items-center mt-2">
+      <% if user_signed_in? %>
+        <% if current_user == @event.admin %>
+          <%# Organisateur : rien à afficher pour rejoindre %>
+        <% elsif @event.participants.include?(current_user) %>
+          <span class="text-muted"><%= t("app.events.show.already_joined") %></span>
+        <% else %>
+          <% if @event.is_free? %>
+            <%= button_to t("app.events.show.join_btn"),
+                          event_attendances_path(@event),
+                          method: :post,
+                          class: "btn btn-success mb-0" %>
+          <% else %>
+            <%= link_to t("app.events.show.join_btn"),
+                        new_event_attendance_path(@event),
+                        class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <span class="text-muted">
+          <%= link_to t("app.nav.sign_in"), new_user_session_path %> <%= t("app.events.show.sign_in_to_join") %>
+        </span>
+      <% end %>
+
+      <%= link_to t("app.events.show.back"), root_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 </div>
