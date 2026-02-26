@@ -29,10 +29,10 @@ gem "puma", "~> 7.2"
 # Amélioration du temps de boot
 gem "bootsnap", require: false
 
-# FRONT (si jamais tu utilises CSS ou JS plus tard)
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
+gem "propshaft"  # Asset Pipeline pour CSS/JS (THP)
 
 # Email parsing
 gem "mail"

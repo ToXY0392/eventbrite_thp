@@ -10,6 +10,12 @@ fr:
       profile_forbidden: Vous n'avez pas accès à ce profil.
       attendance_created: Vous êtes inscrit à cet événement !
     account_dropdown: S'inscrire / Se connecter
+    footer:
+      tagline: Trouvez et créez des événements près de chez vous.
+      thp_project: Projet réalisé dans le cadre de The Hacking Project
+      discover: Découvrir
+      account: Compte
+      rights: Tous droits réservés
     nav:
       home: Accueil
       create_event: Créer un événement
@@ -73,6 +79,7 @@ fr:
         payment_failed: Le paiement a échoué ou a été annulé.
         payment_canceled: Paiement annulé.
     users:
+      avatar: Photo de profil
       show:
         first_name_default: Prénom
         last_name_default: Nom
@@ -82,6 +89,7 @@ fr:
         edit_password: Modifier l'email / mot de passe
         events_created: Événements créés
         no_events: Vous n'avez pas encore créé d'événement.
+        update_avatar: Mettre à jour l'avatar
 
   date:
     day_names:

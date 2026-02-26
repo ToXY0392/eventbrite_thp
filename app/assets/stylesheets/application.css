@@ -1,10 +1,377 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Eventbrite THP - Design professionnel thème sombre
+ * Chargé en dernier pour surcharger Bootstrap / Modern Business
  */
+
+/* Variables Bootstrap overrides - thème sombre gris et opaque */
+[data-bs-theme="dark"] {
+  --bs-card-bg: #252a31;
+  --bs-body-bg: #1e2228;
+}
+
+/* Fond gris opaque uniforme */
+html,
+body {
+  min-height: 100%;
+  background: #1e2228 !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main,
+.container {
+  background: transparent !important;
+}
+
+/* Header + Navbar - opaque, même hauteur que footer */
+header {
+  background-color: #171a1e;
+  opacity: 1;
+  min-height: 56px;
+}
+
+.navbar-eventbrite {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  background: #171a1e !important;
+  background-color: #171a1e !important;
+  opacity: 1;
+}
+
+.navbar-eventbrite .navbar-collapse {
+  background-color: transparent;
+}
+
+.navbar-eventbrite .navbar-brand {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+.brand-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-eventbrite .nav-link {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-eventbrite .nav-link:hover {
+  color: #6ea8fe !important;
+}
+
+.navbar-eventbrite .dropdown-menu {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  background: #171a1e !important;
+  background-color: #171a1e !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 1;
+}
+
+.navbar-eventbrite .dropdown-menu .dropdown-item {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-eventbrite .dropdown-menu .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.navbar-eventbrite .dropdown-menu .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-eventbrite .dropdown-menu form {
+  margin: 0;
+}
+
+.navbar-eventbrite .dropdown-menu .btn {
+  border-radius: 0;
+  text-align: left;
+}
+
+/* Hero - même rendu que les cards, texte lisible et centré */
+.hero-full {
+  background: #252a31 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  margin: 0 auto 2rem;
+  max-width: calc(100% - 2rem);
+}
+
+.hero-full h1 {
+  color: #fff !important;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-full .lead {
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-align: center;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-full .btn-primary {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-full .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Cartes événements - contrastées mais discrètes */
+.event-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+  background: #252a31 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.event-card .card-body {
+  background: #252a31 !important;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.event-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.event-card .card-img-placeholder {
+  height: 200px;
+  background: #2a3038;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 2.5rem;
+}
+
+/* Flash messages - version sombre */
+.alert {
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.alert-success {
+  background: rgba(25, 135, 84, 0.25);
+  color: #75c997;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.25);
+  color: #f5a8b0;
+}
+
+.alert-info {
+  background: rgba(13, 202, 240, 0.15);
+  color: #6edff6;
+}
+
+/* Footer - centré et bien rangé */
+.footer-eventbrite {
+  background: #171a1e !important;
+  background-color: #171a1e !important;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-eventbrite .footer-inner {
+  width: 100%;
+  max-width: 600px;
+}
+
+.footer-eventbrite .footer-content {
+  width: 100%;
+}
+
+.footer-eventbrite .footer-link {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-eventbrite .footer-link:hover {
+  color: #6ea8fe;
+}
+
+.footer-eventbrite .footer-info {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.footer-eventbrite .footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.footer-eventbrite .footer-social-link:hover {
+  color: #6ea8fe;
+  transform: translateY(-2px);
+}
+
+.footer-eventbrite .footer-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Cards générales - contrastées (override Modern Business) */
+.card {
+  border-radius: 0.5rem;
+  background: #252a31 !important;
+  background-color: #252a31 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card .card-body {
+  background: #252a31 !important;
+  background-color: #252a31 !important;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Profil utilisateur */
+.card .img-thumbnail.rounded-circle {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Formulaires - fond sombre, pas de blanc */
+.form-label {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control,
+.form-select {
+  background: #1e2228;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: #1e2228;
+  border-color: #0d6efd;
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* List-group - fond gris opaque */
+.list-group-item {
+  background: #1e2228;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.list-group-item-action:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Texte principal des pages */
+h1, h2, h3, h4, h5, h6 {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Prochains événements - blanc et centré */
+.upcoming-title {
+  color: #fff !important;
+  text-align: center !important;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* Boutons avec style */
+.btn-primary {
+  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
+}
+
+.btn-lg {
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+}
+
+.btn-success {
+  box-shadow: 0 2px 4px rgba(25, 135, 84, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(25, 135, 84, 0.4);
+}
+
+/* Cards améliorées */
+.event-card .card-body {
+  padding: 1.25rem;
+}
+
+.event-card .card-title {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.event-card .card-text {
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.event-card .text-muted,
+.event-card .card-text.text-muted {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.event-card .badge-free {
+  background: #198754;
+  font-size: 0.7rem;
+}

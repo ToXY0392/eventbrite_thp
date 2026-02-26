@@ -51,7 +51,8 @@ DESCRIPTIONS_EVENEMENTS = [
   "Projection d'un film culte sous les étoiles. Apportez vos couvertures et votre pique-nique."
 ].freeze
 
-5.times do
+# Créer des événements payants et gratuits
+4.times do
   admin = users.sample
 
   Event.create!(
@@ -64,6 +65,17 @@ DESCRIPTIONS_EVENEMENTS = [
     admin: admin
   )
 end
+
+# Un événement gratuit pour tester le flux sans Stripe
+Event.create!(
+  start_date: Faker::Time.forward(days: rand(3..20), period: :evening),
+  duration: 60,
+  title: "Apéro gratuit entre développeurs",
+  description: "Rencontre informelle entre passionnés de code. Venez échanger autour d'un verre dans une ambiance conviviale.",
+  price: 0,
+  location: Faker::Address.city,
+  admin: users.sample
+)
 
 events = Event.all
 

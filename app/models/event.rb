@@ -4,9 +4,8 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :participants, through: :attendances, source: :user
 
-  # Active Storage : photo de l'événement
+  # Active Storage : photo de l'événement (optionnelle pour le seed)
   has_one_attached :picture
-  validates :picture, presence: true
 
   # Validations
   validates :start_date, presence: true

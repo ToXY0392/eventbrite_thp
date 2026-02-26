@@ -1,19 +1,31 @@
-<div class="p-4 mb-4 bg-light rounded-3">
-  <h1 class="display-5 fw-bold"><%= t("app.events.index.title") %></h1>
-  <p class="lead">
-    <%= t("app.events.index.subtitle") %>
-  </p>
-  <%= link_to t("app.events.index.create_btn"), new_event_path, class: "btn btn-primary btn-lg" %>
-</div>
-
-<h2 class="h4 mb-3"><%= t("app.events.index.upcoming") %></h2>
-
-<% if @events.any? %>
-  <div class="list-group mb-4">
-    <% @events.each do |event| %>
-      <%= render "events/event_card", event: event %>
-    <% end %>
+<% content_for :skip_container do %><% end %>
+<!-- Hero pleine largeur -->
+<section class="hero-full py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold text-white mb-3"><%= t("app.events.index.title") %></h1>
+        <p class="lead mb-0"><%= t("app.events.index.subtitle") %></p>
+      </div>
+    </div>
   </div>
-<% else %>
-  <p><%= t("app.events.index.empty") %></p>
-<% end %>
+</section>
+
+<!-- Contenu principal -->
+<div class="container py-5">
+  <h2 class="upcoming-title h4 fw-semibold mb-4"><%= t("app.events.index.upcoming") %></h2>
+
+  <% if @events.any? %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @events.each do |event| %>
+        <div class="col">
+          <%= render "events/event_card", event: event %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-5 rounded-3" style="border: 1px solid rgba(255,255,255,0.08);">
+      <p class="text-white-50 fs-5 mb-0"><%= t("app.events.index.empty") %></p>
+    </div>
+  <% end %>
+</div>

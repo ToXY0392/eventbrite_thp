@@ -1,8 +1,14 @@
-<%= link_to event_path(event), class: "list-group-item list-group-item-action" do %>
-  <h4 class="h6 mb-1"><%= event.title %></h4>
-  <small>
-    <strong><%= t("app.events.labels.date") %> :</strong> <%= l(event.start_date, format: :long) rescue event.start_date %> |
-    <strong><%= t("app.events.labels.price") %> :</strong> <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %> |
-    <strong><%= t("app.events.labels.location") %> :</strong> <%= event.location %>
-  </small>
+<%= link_to event_path(event), class: "list-group-item list-group-item-action d-flex gap-3 align-items-center" do %>
+  <% if event.picture.attached? %>
+    <%= image_tag event.picture, class: "rounded flex-shrink-0", style: "width: 50px; height: 50px; object-fit: cover;" %>
+  <% else %>
+    <div class="rounded flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: #1e2228; border: 1px solid rgba(255,255,255,0.1);">
+      <span class="small fw-bold text-white-50"><%= event.title[0, 1].upcase %></span>
+    </div>
+  <% end %>
+  <div class="flex-grow-1 min-w-0">
+    <div class="fw-semibold"><%= event.title %></div>
+    <small class="text-muted"><%= l(event.start_date, format: :short) rescue event.start_date %> • <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %></small>
+  </div>
+  <span class="badge bg-secondary">→</span>
 <% end %>

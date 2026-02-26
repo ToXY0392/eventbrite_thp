@@ -1,6 +1,10 @@
-<div class="row">
-  <div class="col-md-8 offset-md-2">
-    <h1 class="h3 mb-4"><%= t("app.events.edit.title") %></h1>
-    <%= render "events/event_form", event: @event %>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-4"><%= t("app.events.edit.title") %></h1>
+        <%= render "events/event_form", event: @event, cancel_path: event_path(@event) %>
+      </div>
+    </div>
   </div>
 </div>

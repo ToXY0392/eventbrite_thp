@@ -1,7 +1,7 @@
 <div class="row">
   <!-- Colonne avatar + infos -->
   <div class="col-md-4 mb-4">
-    <div class="card">
+    <div class="card border-0 shadow-sm">
       <div class="card-body text-center">
 
         <!-- 🔹 Avatar -->
@@ -55,16 +55,19 @@
 
   <!-- Colonne events -->
   <div class="col-md-8 mb-4">
-    <h3 class="h5 mb-3"><%= t("app.users.show.events_created") %></h3>
-
-    <% if @created_events.any? %>
-      <div class="list-group">
-        <% @created_events.each do |event| %>
-          <%= render "events/event_list_item", event: event %>
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <h3 class="h5 mb-4"><%= t("app.users.show.events_created") %></h3>
+        <% if @created_events.any? %>
+          <div class="list-group list-group-flush">
+            <% @created_events.each do |event| %>
+              <%= render "events/event_list_item", event: event %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted mb-0"><%= t("app.users.show.no_events") %></p>
         <% end %>
       </div>
-    <% else %>
-      <p><%= t("app.users.show.no_events") %></p>
-    <% end %>
+    </div>
   </div>
 </div>

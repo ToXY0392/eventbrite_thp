@@ -6,8 +6,10 @@ A Rails application to manage events like Eventbrite.
 
 - 💎 Ruby 3.4.2
 - 🐘 PostgreSQL 9.3+
-- 📦 Node.js (optional for the asset pipeline)
+- 📦 Node.js (optional, for the asset pipeline)
 - 💳 Compte **Stripe** (clés de test pour le paiement)
+- 🖼️ **Active Storage** – images d'événements et avatars utilisateur
+- 🎨 **Bootstrap 5** (thème sombre personnalisé)
 
 **Main technologies:**
 - 🚂 Rails 8.1
@@ -53,32 +55,31 @@ The application will be accessible at `http://localhost:3000`
 
 ## 📝 Project Steps to Complete
 
-Steps to complete the **Eventbrite : Stripe et composants (partials)** exercise :
+Exercice **Eventbrite : Stripe et composants (partials)** – complété ✅
 
-### 1. **Partials**
-- Extraire les molécules en partials (`_event_card`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`)
-- Réutiliser les partials dans index, show, new, edit, users#show
+### 1. **Partials** ✅
+- Partials extraits : `_event_card`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`
+- Réutilisés dans index, show, new, edit, users#show
 
-### 2. **Stripe – Paiement**
-- Ajouter la gem `stripe` et `dotenv-rails`
-- Créer `config/initializers/stripe.rb` avec `Stripe.api_key = ENV["STRIPE_SECRET_KEY"]`
-- Créer `.env` avec `STRIPE_PUBLIC_KEY` et `STRIPE_SECRET_KEY` (clés sur https://dashboard.stripe.com/test/apikeys)
-- Flux paiement : bouton "Rejoindre" → `attendances#new` → `attendances#checkout` (Stripe Checkout) → `attendances#success` (création attendance + `stripe_customer_id`)
-- En cas d’annulation : redirection vers l’événement avec message d’erreur
+### 2. **Stripe – Paiement** ✅
+- Gem `stripe` et `dotenv-rails`
+- `config/initializers/stripe.rb`
+- `.env.example` en template (cp .env.example .env puis remplir les clés)
+- Flux : bouton "Rejoindre" → `attendances#new` → `attendances#checkout` (Stripe Checkout) → `attendances#success`
+- Annulation : redirection vers l'événement avec message d'erreur
 
-### 3. **Espace admin organisateur**
+### 3. **Espace admin organisateur** ✅
 - Lien "Mon espace événement" sur `events#show` (visible uniquement par l’organisateur)
 - `attendances#index` : liste des participants, boutons Modifier / Supprimer l’événement
 - `before_action :ensure_event_admin` pour restreindre l’accès
 
-### 4. **Bonus : Événements gratuits**
-- Autoriser `price == 0` dans le modèle Event
-- Méthode `is_free?` sur Event
-- Pour un événement gratuit : rejoindre directement (sans Stripe), participation créée immédiatement
+### 4. **Bonus : Événements gratuits** ✅
+- `price >= 0` dans le modèle Event – méthode `is_free?`
+- Rejoindre directement sans Stripe pour les événements gratuits
 
-### 5. **Seed & test**
-- `rails db:seed` – génère utilisateurs (password: password123) et événements en français
-- Tester : inscription, paiement Stripe (carte test 4242 4242 4242 4242), événement gratuit, espace admin
+### 5. **Seed & test** ✅
+- `rails db:seed` – utilisateurs (password: password123), événements (dont 1 gratuit), attendances
+- À tester : inscription, paiement Stripe (carte test 4242 4242 4242 4242), événement gratuit, espace admin
 
 ## 🏗️ Architecture
 
@@ -88,14 +89,7 @@ Steps to complete the **Eventbrite : Stripe et composants (partials)** exercise 
 - 🎭 **Assets** : Stylesheets and JavaScript
 
 
-## 🗄️ Database
 
-The project uses PostgreSQL with configuration in `config/database.yml`.
-
-**Available environments:**
-- 💻 `development` : Local development
-- 🧪 `test` : Automated tests
-- 🌐 `production` : Production environment
 
 ## 🚀 Deployment
 

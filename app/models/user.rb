@@ -18,11 +18,11 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
   
-  # 🔹 Retourne l'avatar uploadé ou une image par défaut
+  # 🔹 Retourne l'avatar uploadé ou une image par défaut (random fixe par utilisateur, comme demandé par THP)
   def avatar_or_default
     return avatar if avatar.attached?
 
-    # image par défaut dans app/assets/images/avatars/default.png
-    "avatars/default.png"
+    # Photo de profil "random" : déterministe selon l'id pour rester cohérent
+    "avatars/default_#{(id || rand(1..3)) % 3 + 1}.png"
   end
 end

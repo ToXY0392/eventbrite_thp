@@ -1,24 +1,19 @@
 <div class="row">
-  <div class="col-md-8 mb-4">
-    <h1 class="h3 mb-3"><%= @event.title %></h1>
-
-    <% if @event.picture.attached? %>
-      <div class="mb-3">
-        <%= image_tag @event.picture,
-                      class: "img-fluid rounded",
-                      alt: "Image de l'événement" %>
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm mb-4">
+      <% if @event.picture.attached? %>
+        <%= image_tag @event.picture, class: "card-img-top", alt: @event.title, style: "max-height: 400px; object-fit: cover;" %>
+      <% end %>
+      <div class="card-body">
+        <h1 class="h2 mb-4"><%= @event.title %></h1>
+        <div class="mb-4">
+          <%= simple_format(@event.description, class: "mb-0") %>
+        </div>
+        <%= render "events/event_details", event: @event %>
+        <%= render "events/event_admin_buttons", event: @event %>
       </div>
-    <% end %>  
-
-    <p class="mb-3">
-      <%= simple_format(@event.description) %>
-    </p>
-
-    <%= render "events/event_details", event: @event %>
-
-    <%= render "events/event_admin_buttons", event: @event %>
-
-    <div class="d-flex flex-wrap gap-2 align-items-center mt-2">
+    </div>
+    <div class="d-flex flex-wrap gap-2 align-items-center">
       <% if user_signed_in? %>
         <% if current_user == @event.admin %>
           <%# Organisateur : rien à afficher pour rejoindre %>

@@ -16,6 +16,9 @@ module EventbriteThp
     # Autoloading mode (zeitwerk)
     config.autoload_lib(ignore: %w(assets tasks))
 
+    # Asset Pipeline (Propshaft) : inclure vendor pour Bootstrap et le thème
+    config.assets.paths << Rails.root.join("vendor/assets")
+
     # Do not eager load in development
     config.eager_load = false
 
