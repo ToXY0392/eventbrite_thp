@@ -1,69 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title><%= content_for?(:title) ? yield(:title) : t("app.title") %></title>
-    <meta charset="utf-8">
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : t("app.title") %></title>
+  <meta charset="utf-8">
 
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-    <%= tag.link rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" %>
-  </head>
+  <!-- PWA -->
+  <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-      <div class="container">
+  <!-- 🔹 CSS Rails + Bootstrap + Thème -->
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "bootstrap", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "modern-business", "data-turbo-track": "reload" %>
+</head>
 
-        <a class="navbar-brand" href="/">Eventbrite</a>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <%= link_to "EventbriteTHP", root_path, class: "navbar-brand" %>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <%= link_to t("app.nav.home"), root_path, class: "nav-link" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <%= link_to t("app.nav.home"), root_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to t("app.nav.create_event"), new_event_path, class: "nav-link" %>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <%= t("app.nav.profile") %>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><%= link_to t("app.nav.profile"), user_path(current_user), class: "dropdown-item" %></li>
+                <li><%= link_to t("app.nav.edit_account"), edit_user_registration_path, class: "dropdown-item" %></li>
+                <li>
+                  <%= button_to t("app.nav.sign_out"), destroy_user_session_path,
+                                method: :delete,
+                                class: "dropdown-item bg-transparent w-100 text-start" %>
+                </li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <%= link_to t("app.nav.create_event"), new_event_path, class: "nav-link" %>
+          <% else %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <%= t("app.nav.account_dropdown") %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><%= link_to t("app.nav.sign_up"), new_user_registration_path, class: "dropdown-item" %></li>
+                <li><%= link_to t("app.nav.sign_in"), new_user_session_path, class: "dropdown-item" %></li>
+              </ul>
             </li>
-          </ul>
-
-          <ul class="navbar-nav">
-
-            <% if user_signed_in? %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><%= t("app.nav.profile") %></a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><%= link_to t("app.nav.profile"), user_path(current_user), class: "dropdown-item" %></li>
-                  <li><%= link_to t("app.nav.edit_account"), edit_user_registration_path, class: "dropdown-item" %></li>
-                  <li><%= button_to t("app.nav.sign_out"), destroy_user_session_path, method: :delete, class: "dropdown-item border-0 bg-transparent w-100 text-start" %></li>
-                </ul>
-              </li>
-            <% else %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><%= t("app.account_dropdown") %></a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><%= link_to t("app.nav.sign_up"), new_user_registration_path, class: "dropdown-item" %></li>
-                  <li><%= link_to t("app.nav.sign_in"), new_user_session_path, class: "dropdown-item" %></li>
-                </ul>
-              </li>
-            <% end %>
-
-          </ul>
-        </div>
+          <% end %>
+        </ul>
 
       </div>
-    </nav>
-
-    <div class="container">
-      <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
-      <% if alert %><div class="alert alert-danger"><%= alert %></div><% end %>
-      <%= yield %>
     </div>
+  </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <div class="container">
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+
+  <!-- 🔹 JS Rails + jQuery + Bootstrap -->
+  <%= javascript_importmap_tags %>
+  <%= javascript_include_tag "jquery", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "bootstrap.bundle", "data-turbo-track": "reload" %>
+</body>
 </html>
