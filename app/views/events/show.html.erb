@@ -2,6 +2,14 @@
   <div class="col-md-8 mb-4">
     <h1 class="h3 mb-3"><%= @event.title %></h1>
 
+    <% if @event.picture.attached? %>
+      <div class="mb-3">
+        <%= image_tag @event.picture,
+                      class: "img-fluid rounded",
+                      alt: "Image de l'événement" %>
+      </div>
+    <% end %>  
+
     <p class="mb-3">
       <%= simple_format(@event.description) %>
     </p>

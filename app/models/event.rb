@@ -1,9 +1,12 @@
 class Event < ApplicationRecord
   # Associations
   belongs_to :admin, class_name: 'User'
-
   has_many :attendances, dependent: :destroy
   has_many :participants, through: :attendances, source: :user
+
+  # Active Storage : photo de l'événement
+  has_one_attached :picture
+  validates :picture, presence: true
 
   # Validations
   validates :start_date, presence: true
@@ -11,10 +14,7 @@ class Event < ApplicationRecord
 
   validates :duration,
             presence: true,
-            numericality: {
-              only_integer: true,
-              greater_than: 0
-            }
+            numericality: { only_integer: true, greater_than: 0 }
   validate :duration_multiple_of_5
 
   validates :title,

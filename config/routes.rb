@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: [:show], constraints: { id: /\d+/ }
+  resources :users, only: [:show], constraints: { id: /\d+/ } do
+    resources :avatars, only: [:create]
+  end
+  
   resources :events do
     post "attendances/checkout", to: "attendances#checkout", as: :attendance_checkout
     get "attendances/success", to: "attendances#success", as: :attendance_success
