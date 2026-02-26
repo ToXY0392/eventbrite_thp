@@ -275,9 +275,34 @@ header {
 }
 
 /* Formulaires - fond sombre, pas de blanc */
+label,
 .form-label {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
+}
+
+/* Messages d'erreur Devise - lisible en thème sombre */
+#error_explanation {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.5);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+#error_explanation h2 {
+  color: #f5a8b0 !important;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#error_explanation ul {
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+}
+
+#error_explanation li {
+  color: #f5a8b0;
 }
 
 .form-control,
@@ -349,6 +374,17 @@ h1, h2, h3, h4, h5, h6 {
 .btn-success:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(25, 135, 84, 0.4);
+}
+
+/* Liens dans les cartes / formulaires Devise */
+.card a.btn-link,
+.card .btn-link {
+  color: #6ea8fe;
+}
+
+.card a.btn-link:hover,
+.card .btn-link:hover {
+  color: #8fc4ff;
 }
 
 /* Cards améliorées */

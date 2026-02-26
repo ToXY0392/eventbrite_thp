@@ -1,5 +1,11 @@
 # Locale française
 fr:
+  errors:
+    messages:
+      not_saved:
+        one: "1 erreur a empêché l'enregistrement"
+        other: "%{count} erreurs ont empêché l'enregistrement"
+
   app:
     title: Eventbrite THP
     flash:
@@ -254,6 +260,8 @@ fr:
         update: Modifier
       new:
         sign_up: Inscription
+        submit: S'inscrire
+        password_minimum: "(%{count} caractères minimum)"
         signed_up: Bienvenue ! Vous vous êtes bien enregistré(e).
       updated: Votre compte a bien été modifié.
     sessions:
