@@ -19,6 +19,10 @@ class User < ApplicationRecord
   end
   
   # 🔹 Retourne l'avatar uploadé ou une image par défaut (random fixe par utilisateur, comme demandé par THP)
+  def admin?
+    is_admin
+  end
+
   def avatar_or_default
     return avatar if avatar.attached?
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Bonjour <%= @user.first_name || @user.email %>,</h1>
+
+    <p>
+      Malheureusement, votre événement « <%= @event.title %> » n'a pas été validé par notre équipe.
+    </p>
+
+    <p>
+      Si vous avez des questions, n'hésitez pas à nous contacter.
+    </p>
+
+    <p>Cordialement,<br>L'équipe Eventbrite THP</p>
+  </body>
+</html>

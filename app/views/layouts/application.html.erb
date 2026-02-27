@@ -17,7 +17,7 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column" data-turbo="false">
   <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-eventbrite sticky-top">
     <div class="container">
@@ -26,7 +26,7 @@
         <span class="brand-text ms-2">EventbriteTHP</span>
       <% end %>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" data-turbo="false">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -39,6 +39,13 @@
 
         <ul class="navbar-nav align-items-center gap-2">
           <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <li class="nav-item">
+                <%= link_to admin_root_path, class: "nav-link px-3" do %>
+                  <span class="d-none d-md-inline">Admin</span> ⚙️
+                <% end %>
+              </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to new_event_path, class: "btn btn-primary btn-sm px-3" do %>
                 <span class="d-none d-md-inline"><%= t("app.nav.create_event") %></span>
@@ -46,7 +53,7 @@
               <% end %>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-flex align-items-center py-2" href="#" data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center py-2" href="#" data-bs-toggle="dropdown" data-turbo="false">
                 <%= image_tag current_user.avatar_or_default, class: "rounded-circle me-2", style: "width: 32px; height: 32px; object-fit: cover;" %>
                 <span class="d-none d-lg-inline"><%= current_user.first_name.presence || t("app.nav.profile") %></span>
               </a>
@@ -57,6 +64,21 @@
                 <li><%= link_to edit_user_registration_path, class: "dropdown-item py-2" do %>
                   <span class="d-inline-block me-2">⚙️</span><%= t("app.nav.edit_account") %>
                 <% end %></li>
+                <% if current_user.admin? %>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><%= link_to admin_root_path, class: "dropdown-item py-2" do %>
+                    <span class="d-inline-block me-2">🛡️</span><%= t("app.admin.nav_dashboard") %>
+                  <% end %></li>
+                  <li><%= link_to admin_users_path, class: "dropdown-item py-2" do %>
+                    <span class="d-inline-block me-2">👥</span><%= t("app.admin.nav_users") %>
+                  <% end %></li>
+                  <li><%= link_to admin_event_submissions_path, class: "dropdown-item py-2" do %>
+                    <span class="d-inline-block me-2">⏳</span><%= t("app.admin.nav_event_submissions") %>
+                  <% end %></li>
+                  <li><%= link_to admin_events_path, class: "dropdown-item py-2" do %>
+                    <span class="d-inline-block me-2">📅</span><%= t("app.admin.nav_events") %>
+                  <% end %></li>
+                <% end %>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                   <%= button_to t("app.nav.sign_out"), destroy_user_session_path, method: :delete, class: "dropdown-item py-2 text-danger border-0 bg-transparent w-100 text-start" %>
@@ -130,5 +152,6 @@
   <%= javascript_importmap_tags %>
   <%= javascript_include_tag "javascripts/jquery.min", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "javascripts/bootstrap.bundle", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "javascripts/bootstrap_turbo_fix", "data-turbo-track": "reload" %>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<div class="container py-5">
+  <h1 class="h2 mb-4"><%= t("app.admin.dashboard_title") %></h1>
+  <p class="lead text-white-50 mb-4"><%= t("app.admin.welcome") %></p>
+
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-3">
+      <%= link_to admin_root_path, class: "card text-decoration-none text-white bg-dark border-secondary h-100" do %>
+        <div class="card-body">
+          <h5 class="card-title">📊</h5>
+          <p class="card-text mb-0"><%= t("app.admin.nav_dashboard") %></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <%= link_to admin_users_path, class: "card text-decoration-none text-white bg-dark border-secondary h-100" do %>
+        <div class="card-body">
+          <h5 class="card-title">👥</h5>
+          <p class="card-text mb-0"><%= t("app.admin.nav_users") %></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <%= link_to admin_event_submissions_path, class: "card text-decoration-none text-white bg-dark border-secondary h-100" do %>
+        <div class="card-body">
+          <h5 class="card-title">⏳</h5>
+          <p class="card-text mb-0"><%= t("app.admin.nav_event_submissions") %></p>
+          <% pending_count = Event.pending_validation.count %>
+          <% if pending_count > 0 %>
+            <span class="badge bg-warning text-dark"><%= pending_count %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <%= link_to admin_events_path, class: "card text-decoration-none text-white bg-dark border-secondary h-100" do %>
+        <div class="card-body">
+          <h5 class="card-title">📅</h5>
+          <p class="card-text mb-0"><%= t("app.admin.nav_events") %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

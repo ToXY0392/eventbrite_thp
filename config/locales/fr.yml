@@ -7,9 +7,51 @@ fr:
         other: "%{count} erreurs ont empêché l'enregistrement"
 
   app:
-    title: Eventbrite THP
+    admin:
+      forbidden: Accès réservé aux administrateurs.
+      welcome: Bienvenue dans votre espace administrateur.
+      dashboard_title: Tableau de bord
+      nav_dashboard: Tableau de bord
+      nav_users: Utilisateurs
+      nav_events: Événements
+      nav_event_submissions: À valider
+      user:
+        destroyed: L'utilisateur a été supprimé.
+        updated: L'utilisateur a été modifié.
+        created: L'utilisateur a été créé.
+      event:
+        destroyed: L'événement a été supprimé.
+        updated: L'événement a été modifié.
+        created: L'événement a été créé.
+      event_submission:
+        validated: L'événement a été validé. Un email a été envoyé à l'organisateur.
+        rejected: L'événement a été refusé. Un email a été envoyé à l'organisateur.
+      admin_events:
+        index:
+          title: Événements
+          new: Nouvel événement
+          back: Retour au tableau de bord
+        show:
+          title: Événement
+          edit: Modifier
+          destroy: Supprimer
+        form:
+          validated: Validé
+          reviewed: Revue effectuée
+      event_submissions:
+        index:
+          title: Événements en attente de validation
+          empty: Aucun événement en attente.
+          validate: Valider
+          reject: Refuser
+        show:
+          title: Détail de l'événement
+          validate: Valider cet événement
+          reject: Refuser cet événement
+      event_pending: Votre événement a été créé et est en attente de validation par un administrateur.
     flash:
       event_created: L'événement a bien été créé.
+      event_created_pending: L'événement a été créé et est en attente de validation par un administrateur.
       event_updated: L'événement a été modifié.
       event_destroyed: L'événement a été supprimé.
       event_forbidden: Vous ne pouvez pas modifier ou supprimer cet événement.
@@ -39,6 +81,7 @@ fr:
         upcoming: Prochains événements
         empty: Aucun événement pour le moment. Soyez le premier à en créer un !
       labels:
+        pending_validation: En attente de validation
         date: Date
         price: Prix
         free: Gratuit
@@ -56,6 +99,7 @@ fr:
           one: "1 erreur a empêché la création"
           other: "%{count} erreurs ont empêché la création"
       show:
+        unvalidated: Cet événement n'est pas encore validé ou n'est pas accessible.
         duration_minutes: minutes
         unknown: Inconnu
         back: Retour aux événements
@@ -84,6 +128,31 @@ fr:
         use_checkout: Pour les événements payants, utilisez le formulaire de paiement.
         payment_failed: Le paiement a échoué ou a été annulé.
         payment_canceled: Paiement annulé.
+    admin_users:
+      index:
+        title: Utilisateurs
+        new: Nouvel utilisateur
+        email: Email
+        actions: Actions
+      show:
+        title: Utilisateur
+        edit: Modifier
+        destroy: Supprimer
+        back: Retour aux utilisateurs
+      new:
+        title: Nouvel utilisateur
+        submit: Créer
+      edit:
+        title: Modifier l'utilisateur
+        submit: Enregistrer
+      form:
+        email: Email
+        first_name: Prénom
+        last_name: Nom
+        description: Description
+        is_admin: Administrateur
+        password: Mot de passe
+        password_optional: "(laisser vide pour ne pas modifier)"
     users:
       avatar: Photo de profil
       show:

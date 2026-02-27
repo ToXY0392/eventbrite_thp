@@ -1,0 +1,25 @@
+<h1 class="h2 mb-4">Valider ou refuser l'événement</h1>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-body">
+    <h2 class="h5"><%= @event.title %></h2>
+    <p class="text-muted mb-2">par <%= @event.admin.email %></p>
+    <p><%= @event.description.truncate(200) %></p>
+  </div>
+</div>
+
+<div class="d-flex gap-2">
+  <%= button_to t("app.admin.event_submissions.show.validate"),
+                admin_event_submission_path(@event),
+                method: :patch,
+                params: { validated: true },
+                form: { data: { turbo_confirm: "Valider cet événement ?" } },
+                class: "btn btn-success" %>
+  <%= button_to t("app.admin.event_submissions.show.reject"),
+                admin_event_submission_path(@event),
+                method: :patch,
+                params: { validated: false },
+                form: { data: { turbo_confirm: "Refuser cet événement ?" } },
+                class: "btn btn-danger" %>
+  <%= link_to "Annuler", admin_event_submissions_path, class: "btn btn-outline-secondary" %>
+</div>

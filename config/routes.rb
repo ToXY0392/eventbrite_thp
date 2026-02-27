@@ -3,6 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  namespace :admin do
+    root to: "dashboard#index"
+    resources :users
+    resources :events
+    resources :event_submissions, only: [:index, :show, :edit, :update]
+  end
+
   resources :users, only: [:show], constraints: { id: /\d+/ } do
     resources :avatars, only: [:create]
   end

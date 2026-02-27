@@ -17,7 +17,8 @@ puts "Creating users..."
     password_confirmation: "password123",
     first_name: Faker::Name.first_name,
     last_name:  Faker::Name.last_name,
-    description: Faker::Lorem.sentence(word_count: 12)
+    description: Faker::Lorem.sentence(word_count: 12),
+    is_admin: (i == 0) # user1@yopmail.com est admin
   )
 end
 
@@ -62,7 +63,9 @@ DESCRIPTIONS_EVENEMENTS = [
     description: DESCRIPTIONS_EVENEMENTS.sample,
     price: rand(5..150),
     location: Faker::Address.city,
-    admin: admin
+    admin: admin,
+    validated: true,
+    reviewed: true
   )
 end
 
@@ -74,7 +77,9 @@ Event.create!(
   description: "Rencontre informelle entre passionnés de code. Venez échanger autour d'un verre dans une ambiance conviviale.",
   price: 0,
   location: Faker::Address.city,
-  admin: users.sample
+  admin: users.sample,
+  validated: true,
+  reviewed: true
 )
 
 events = Event.all

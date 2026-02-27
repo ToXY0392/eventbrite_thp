@@ -1,4 +1,8 @@
 class Event < ApplicationRecord
+  # Scopes
+  scope :validated, -> { where(validated: true) }
+  scope :pending_validation, -> { where(reviewed: false) }
+
   # Associations
   belongs_to :admin, class_name: 'User'
   has_many :attendances, dependent: :destroy

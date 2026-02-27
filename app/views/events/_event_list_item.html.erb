@@ -8,7 +8,7 @@
   <% end %>
   <div class="flex-grow-1 min-w-0">
     <div class="fw-semibold"><%= event.title %></div>
-    <small class="text-muted"><%= l(event.start_date, format: :short) rescue event.start_date %> • <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %></small>
+    <small class="text-muted"><%= l(event.start_date, format: :short) rescue event.start_date %> • <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %><%= " • " + t("app.events.labels.pending_validation") if event.respond_to?(:reviewed?) && !event.reviewed? %></small>
   </div>
   <span class="badge bg-secondary">→</span>
 <% end %>

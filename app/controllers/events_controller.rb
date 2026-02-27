@@ -4,10 +4,12 @@ class EventsController < ApplicationController
   before_action :ensure_event_admin, only: [:edit, :update, :destroy]
 
   def index
-    @events = Event.order(start_date: :asc)
+    @events = Event.validated.order(start_date: :asc)
   end
 
   def show
+    return redirect_to root_path, alert: t("app.events.show.unvalidated") unless @event.validated?
+
     @attendees_count = @event.attendances.count
     if params[:canceled] == "true"
       flash.now[:alert] = t("app.attendances.errors.payment_canceled")
@@ -23,7 +25,7 @@ class EventsController < ApplicationController
     @event.admin = current_user
 
     if @event.save
-      redirect_to @event, notice: t("app.flash.event_created")
+      redirect_to @event, notice: t("app.flash.event_created_pending")
     else
       render :new, status: :unprocessable_entity
     end

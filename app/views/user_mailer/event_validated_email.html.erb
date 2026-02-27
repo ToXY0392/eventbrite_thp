@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Bonne nouvelle, <%= @user.first_name || @user.email %> !</h1>
+
+    <p>
+      Votre événement « <%= @event.title %> » a été validé par notre équipe.
+    </p>
+
+    <p>
+      Il est désormais visible sur le site. Vous pouvez le consulter ici : <%= link_to @event.title, @url %>.
+    </p>
+
+    <p>À bientôt sur Eventbrite THP !</p>
+  </body>
+</html>

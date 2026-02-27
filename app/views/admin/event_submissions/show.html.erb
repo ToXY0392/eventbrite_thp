@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm mb-4">
+      <% if @event.picture.attached? %>
+        <%= image_tag @event.picture, class: "card-img-top", alt: @event.title, style: "max-height: 400px; object-fit: cover;" %>
+      <% end %>
+      <div class="card-body">
+        <h1 class="h2 mb-4"><%= @event.title %></h1>
+        <div class="mb-4">
+          <%= simple_format(@event.description, class: "mb-0") %>
+        </div>
+        <%= render "events/event_details", event: @event %>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2 mb-4">
+      <%= button_to t("app.admin.event_submissions.show.validate"),
+                    admin_event_submission_path(@event),
+                    method: :patch,
+                    params: { validated: true },
+                    form: { data: { turbo_confirm: "Valider cet événement ?" } },
+                    class: "btn btn-success" %>
+      <%= button_to t("app.admin.event_submissions.show.reject"),
+                    admin_event_submission_path(@event),
+                    method: :patch,
+                    params: { validated: false },
+                    form: { data: { turbo_confirm: "Refuser cet événement ?" } },
+                    class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
+
+<%= link_to "← Retour aux événements à valider", admin_event_submissions_path, class: "btn btn-outline-secondary" %>
