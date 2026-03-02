@@ -5,26 +5,29 @@ Faker::Config.locale = :fr
 
 puts "Cleaning database..."
 Attendance.destroy_all
-Event.destroy_all
-User.destroy_all
+# Ne pas détruire Event et User pour préserver les photos (avatars, pictures)
+# On ne recrée que si la base est vide
 
-puts "Creating users..."
+if User.count.zero?
+  puts "Creating users..."
 
-10.times do |i|
-  User.create!(
-    email: "user#{i + 1}@yopmail.com",
-    password: "password123",
-    password_confirmation: "password123",
-    first_name: Faker::Name.first_name,
-    last_name:  Faker::Name.last_name,
-    description: Faker::Lorem.sentence(word_count: 12),
-    is_admin: (i == 0) # user1@yopmail.com est admin
-  )
+  10.times do |i|
+    User.create!(
+      email: "user#{i + 1}@yopmail.com",
+      password: "password123",
+      password_confirmation: "password123",
+      first_name: Faker::Name.first_name,
+      last_name:  Faker::Name.last_name,
+      description: Faker::Lorem.sentence(word_count: 12),
+      is_admin: (i == 0) # user1@yopmail.com est admin
+    )
+  end
 end
 
 users = User.all
 
-puts "Creating events..."
+if Event.count.zero?
+  puts "Creating events..."
 
 TITRES_EVENEMENTS = [
   "Concert de jazz en plein air",
@@ -81,6 +84,7 @@ Event.create!(
   validated: true,
   reviewed: true
 )
+end
 
 events = Event.all
 

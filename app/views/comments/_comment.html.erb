@@ -1,0 +1,25 @@
+<%
+  author = comment.user
+  author_name = [author.first_name, author.last_name].compact.join(" ").presence || author.email
+%>
+<div class="comment-molecule d-flex gap-3 p-3 border-bottom">
+  <div class="flex-shrink-0">
+    <%= link_to user_path(author) do %>
+      <%= image_tag author.avatar_or_default, class: "rounded-circle", style: "width: 48px; height: 48px; object-fit: cover;", alt: author_name %>
+    <% end %>
+  </div>
+  <div class="flex-grow-1 min-w-0">
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+      <strong class="text-body"><%= author_name %></strong>
+      <small class="text-muted"><%= comment.created_at.strftime("%d/%m/%Y %H:%M") %></small>
+    </div>
+    <p class="mb-0"><%= simple_format(comment.content) %></p>
+    <% if user_signed_in? && comment.user == current_user %>
+      <%= button_to t("app.comments.delete"),
+                    event_comment_path(comment.event, comment),
+                    method: :delete,
+                    data: { turbo_confirm: t("app.comments.delete_confirm") },
+                    class: "btn btn-sm btn-outline-danger mt-2" %>
+    <% end %>
+  </div>
+</div>

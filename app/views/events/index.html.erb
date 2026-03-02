@@ -1,22 +1,50 @@
 <% content_for :skip_container do %><% end %>
 <!-- Hero pleine largeur -->
-<section class="hero-full py-5">
+<section class="hero-full py-3 py-md-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 text-center">
         <h1 class="display-4 fw-bold text-white mb-3"><%= t("app.events.index.title") %></h1>
-        <p class="lead mb-0"><%= t("app.events.index.subtitle") %></p>
+        <p class="lead mb-4"><%= t("app.events.index.subtitle") %></p>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <%= link_to t("app.events.index.feature_cta_discover"), "#events", class: "btn btn-light btn-lg px-4" %>
+          <%= link_to t("app.events.index.feature_cta_create"), new_event_path, class: "btn btn-outline-light btn-lg px-4" %>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Bloc image + texte -->
+<div class="py-4">
+  <%= render "shared/feature_block",
+             title: t("app.events.index.feature_create_title"),
+             text: t("app.events.index.feature_create_text"),
+             image_left: false,
+             cta_text: t("app.events.index.feature_cta_create"),
+             cta_path: new_event_path %>
+</div>
+
+<!-- Cartes villes -->
+<% if @cities.any? %>
+  <div class="container py-4">
+    <h2 class="h4 fw-semibold mb-4 text-center"><%= t("app.cities.title") %></h2>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3 justify-content-center">
+      <% @cities.each do |location, count| %>
+        <div class="col">
+          <%= render "shared/city_card", name: location, events_count: count %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <!-- Contenu principal -->
-<div class="container py-5">
+<div class="container py-3 py-md-5" id="events">
   <h2 class="upcoming-title h4 fw-semibold mb-4"><%= t("app.events.index.upcoming") %></h2>
 
   <% if @events.any? %>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
       <% @events.each do |event| %>
         <div class="col">
           <%= render "events/event_card", event: event %>
@@ -24,8 +52,13 @@
       <% end %>
     </div>
   <% else %>
-    <div class="text-center py-5 rounded-3" style="border: 1px solid rgba(255,255,255,0.08);">
-      <p class="text-white-50 fs-5 mb-0"><%= t("app.events.index.empty") %></p>
+    <div class="text-center py-5 rounded-3 border border-secondary bg-light">
+      <p class="text-muted fs-5 mb-0">
+        <%= params[:location].present? ? t("app.events.index.empty_by_location", location: params[:location]) : t("app.events.index.empty") %>
+      </p>
+      <% if params[:location].present? %>
+        <%= link_to t("app.events.index.show_all"), root_path, class: "btn btn-outline-primary mt-3" %>
+      <% end %>
     </div>
   <% end %>
 </div>

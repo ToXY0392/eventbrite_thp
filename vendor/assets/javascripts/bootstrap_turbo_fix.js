@@ -2,12 +2,11 @@
 function initBootstrapComponents() {
   if (typeof bootstrap === "undefined") return;
 
-  // Dropdowns : getOrCreateInstance évite les doublons
+  // Dropdowns : respecter data-bs-display (static pour navbar = menu en dessous)
   document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function (el) {
     try {
       bootstrap.Dropdown.getOrCreateInstance(el);
     } catch (e) {
-      // Si erreur, forcer une nouvelle instance après dispose
       var instance = bootstrap.Dropdown.getInstance(el);
       if (instance) instance.dispose();
       new bootstrap.Dropdown(el);

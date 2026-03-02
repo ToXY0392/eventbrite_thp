@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   belongs_to :admin, class_name: 'User'
   has_many :attendances, dependent: :destroy
   has_many :participants, through: :attendances, source: :user
+  has_many :comments, dependent: :destroy
 
   # Active Storage : photo de l'événement (optionnelle pour le seed)
   has_one_attached :picture

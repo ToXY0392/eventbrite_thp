@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :events, foreign_key: :admin_id, class_name: "Event", dependent: :destroy
   has_many :attendances, dependent: :destroy
   has_many :attended_events, through: :attendances, source: :event
+  has_many :comments, dependent: :destroy
 
   # 🔹 Active Storage : avatar
   has_one_attached :avatar

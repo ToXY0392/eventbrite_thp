@@ -1,0 +1,22 @@
+<%
+  title = local_assigns[:title] || "Page"
+  image = local_assigns[:image]
+  subtitle = local_assigns[:subtitle]
+%>
+<section class="banner-small py-2 py-md-4 mb-4">
+  <div class="container">
+    <div class="row align-items-center">
+      <% if image.present? %>
+        <div class="col-auto me-3 d-none d-md-block">
+          <%= image_tag image, class: "banner-small-img rounded", alt: title %>
+        </div>
+      <% end %>
+      <div class="col">
+        <h1 class="banner-small-title mb-0 fw-bold text-white"><%= title %></h1>
+        <% if subtitle.present? %>
+          <p class="text-white-50 mb-0 mt-1 small"><%= subtitle %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

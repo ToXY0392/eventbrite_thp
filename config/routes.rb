@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post "attendances/checkout", to: "attendances#checkout", as: :attendance_checkout
     get "attendances/success", to: "attendances#success", as: :attendance_success
     resources :attendances, only: [:create, :new, :index]
+    resources :comments, only: [:create, :destroy]
   end
 
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

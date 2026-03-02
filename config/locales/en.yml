@@ -28,4 +28,6 @@
 #       enabled: "ON"
 
 en:
+  app:
+    title: Eventbrite THP
   hello: "Hello world"

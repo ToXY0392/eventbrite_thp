@@ -1,5 +1,10 @@
 # Locale française
 fr:
+  time:
+    formats:
+      short: "%d/%m/%Y %H:%M"
+      long: "%e %B %Y à %H:%M"
+
   errors:
     messages:
       not_saved:
@@ -7,6 +12,7 @@ fr:
         other: "%{count} erreurs ont empêché l'enregistrement"
 
   app:
+    title: Eventbrite THP
     admin:
       forbidden: Accès réservé aux administrateurs.
       welcome: Bienvenue dans votre espace administrateur.
@@ -57,6 +63,16 @@ fr:
       event_forbidden: Vous ne pouvez pas modifier ou supprimer cet événement.
       profile_forbidden: Vous n'avez pas accès à ce profil.
       attendance_created: Vous êtes inscrit à cet événement !
+    comments:
+      title: Commentaires
+      empty: Aucun commentaire. Soyez le premier à commenter !
+      placeholder: Écrire un commentaire...
+      submit: Commenter
+      sign_in_to_comment: pour laisser un commentaire.
+      created: Votre commentaire a été publié.
+      destroyed: Votre commentaire a été supprimé.
+      delete: Supprimer
+      delete_confirm: Supprimer ce commentaire ?
     account_dropdown: S'inscrire / Se connecter
     footer:
       tagline: Trouvez et créez des événements près de chez vous.
@@ -80,6 +96,14 @@ fr:
         create_btn: Créer un nouvel événement
         upcoming: Prochains événements
         empty: Aucun événement pour le moment. Soyez le premier à en créer un !
+        empty_by_location: Aucun événement à %{location} pour le moment.
+        show_all: Voir tous les événements
+        feature_discover_title: Découvrez des événements près de chez vous
+        feature_discover_text: "Trouvez des soirées, meetups, ateliers et conférences dans votre ville. Rejoignez une communauté active et vivez des moments inoubliables."
+        feature_create_title: Créez et organisez vos événements
+        feature_create_text: "Proposez vos idées, rassemblez votre communauté et partagez vos passions. Créez un événement en quelques clics."
+        feature_cta_discover: Découvrir les événements
+        feature_cta_create: Créer un événement
       labels:
         pending_validation: En attente de validation
         date: Date
@@ -113,6 +137,12 @@ fr:
       edit:
         title: Modifier l'événement
         submit: Enregistrer les modifications
+    cities:
+      title: Explorons par ville
+      events_count:
+        zero: Aucun événement
+        one: 1 événement
+        other: "%{count} événements"
     attendances:
       new:
         title: Inscription et paiement
@@ -338,6 +368,10 @@ fr:
         sign_in: Connexion
       signed_in: Connecté(e).
       signed_out: Déconnecté(e).
+    unlocks:
+      new:
+        resend_unlock_instructions: Renvoyer les instructions de déverrouillage
+        send_unlock_instructions: Renvoyer les instructions
     shared:
       links:
         back: Retour

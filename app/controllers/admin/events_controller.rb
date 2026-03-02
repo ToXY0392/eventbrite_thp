@@ -17,6 +17,8 @@ module Admin
 
     def create
       @event = Event.new(event_params)
+      @event.validated = true
+      @event.reviewed = true
       if @event.save
         redirect_to admin_event_path(@event), notice: t("app.admin.event.created")
       else
@@ -47,7 +49,9 @@ module Admin
     end
 
     def event_params
-      params.require(:event).permit(:admin_id, :title, :description, :start_date, :duration, :price, :location, :picture, :validated, :reviewed)
+      p = params.require(:event).permit(:admin_id, :title, :description, :start_date, :duration, :price, :location, :picture, :validated, :reviewed)
+      p[:price] = 0 if p[:price].to_s.strip.blank?
+      p
     end
   end
 end

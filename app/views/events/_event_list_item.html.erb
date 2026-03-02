@@ -1,14 +1,26 @@
-<%= link_to event_path(event), class: "list-group-item list-group-item-action d-flex gap-3 align-items-center" do %>
-  <% if event.picture.attached? %>
-    <%= image_tag event.picture, class: "rounded flex-shrink-0", style: "width: 50px; height: 50px; object-fit: cover;" %>
-  <% else %>
-    <div class="rounded flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: #1e2228; border: 1px solid rgba(255,255,255,0.1);">
-      <span class="small fw-bold text-white-50"><%= event.title[0, 1].upcase %></span>
+<div class="list-group-item d-flex gap-3 align-items-center">
+  <%= link_to event_path(event), class: "list-group-item-action flex-grow-1 min-w-0 d-flex gap-3 align-items-center text-decoration-none text-body" do %>
+    <% if event.picture.attached? %>
+      <%= image_tag event.picture, class: "rounded flex-shrink-0", style: "width: 50px; height: 50px; object-fit: cover;" %>
+    <% else %>
+      <div class="rounded flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: #1e2228; border: 1px solid rgba(255,255,255,0.1);">
+        <span class="small fw-bold text-white-50"><%= event.title[0, 1].upcase %></span>
+      </div>
+    <% end %>
+    <div class="flex-grow-1 min-w-0">
+      <div class="fw-semibold"><%= event.title %></div>
+      <small class="text-muted"><%= event.start_date.strftime("%d/%m/%Y %H:%M") %> • <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %><%= " • " + t("app.events.labels.pending_validation") if event.respond_to?(:reviewed?) && !event.reviewed? %></small>
+    </div>
+    <span class="badge bg-secondary flex-shrink-0">→</span>
+  <% end %>
+  <% if local_assigns[:show_admin_actions] %>
+    <div class="flex-shrink-0 d-flex gap-1">
+      <%= link_to t("app.events.show.edit_btn"), edit_event_path(event), class: "btn btn-sm btn-outline-primary" %>
+      <%= button_to t("app.events.show.delete_btn"),
+                    event_path(event),
+                    method: :delete,
+                    data: { turbo_confirm: t("app.events.show.delete_confirm") },
+                    class: "btn btn-sm btn-outline-danger" %>
     </div>
   <% end %>
-  <div class="flex-grow-1 min-w-0">
-    <div class="fw-semibold"><%= event.title %></div>
-    <small class="text-muted"><%= l(event.start_date, format: :short) rescue event.start_date %> • <%= event.is_free? ? t("app.events.labels.free") : "#{event.price} €" %><%= " • " + t("app.events.labels.pending_validation") if event.respond_to?(:reviewed?) && !event.reviewed? %></small>
-  </div>
-  <span class="badge bg-secondary">→</span>
-<% end %>
+</div>

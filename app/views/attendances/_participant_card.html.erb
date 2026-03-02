@@ -1,0 +1,20 @@
+<%
+  user = local_assigns[:user] || (local_assigns[:attendance]&.user)
+  return unless user
+  display_name = [user.first_name, user.last_name].compact.join(" ").presence || user.email
+%>
+<div class="card participant-card border-0 shadow-sm h-100">
+  <div class="card-body d-flex align-items-center p-3">
+    <div class="flex-shrink-0 me-3">
+      <%= link_to user_path(user) do %>
+        <%= image_tag user.avatar_or_default, class: "participant-avatar rounded-circle", alt: display_name %>
+      <% end %>
+    </div>
+    <div class="flex-grow-1 min-w-0">
+      <%= link_to user_path(user), class: "text-decoration-none text-body" do %>
+        <h6 class="card-title mb-1 fw-semibold"><%= display_name %></h6>
+      <% end %>
+      <small class="text-muted d-block text-truncate"><%= user.email %></small>
+    </div>
+  </div>
+</div>

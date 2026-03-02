@@ -1,3 +1,8 @@
+<%
+  user_display_name = [@user.first_name, @user.last_name].compact.join(" ").presence || @user.email
+%>
+<%= render "shared/banner_small", title: user_display_name, image: @user.avatar_or_default %>
+
 <div class="row">
   <!-- Colonne avatar + infos -->
   <div class="col-md-4 mb-4">
@@ -61,7 +66,7 @@
         <% if @created_events.any? %>
           <div class="list-group list-group-flush">
             <% @created_events.each do |event| %>
-              <%= render "events/event_list_item", event: event %>
+              <%= render "events/event_list_item", event: event, show_admin_actions: (user_signed_in? && current_user == @user) %>
             <% end %>
           </div>
         <% else %>

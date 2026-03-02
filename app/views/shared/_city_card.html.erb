@@ -1,0 +1,15 @@
+<%
+  city_name = local_assigns[:name] || "Ville"
+  events_count = local_assigns[:events_count] || 0
+%>
+<%= link_to root_path(location: city_name), class: "card city-card h-100 text-decoration-none border-0 shadow-sm d-flex flex-column" do %>
+  <div class="city-card-placeholder card-img-top d-flex align-items-center justify-content-center bg-primary bg-opacity-10" style="height: 120px;">
+    <span class="display-4 text-primary opacity-50">📍</span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title mb-1"><%= city_name %></h5>
+    <p class="card-text text-muted small mb-0">
+      <%= t("app.cities.events_count", count: events_count) %>
+    </p>
+  </div>
+<% end %>

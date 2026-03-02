@@ -1,24 +1,12 @@
 /*
- * Eventbrite THP - Design professionnel thème sombre
- * Chargé en dernier pour surcharger Bootstrap / Modern Business
+ * Eventbrite THP - Overrides pour Bootswatch Minty
+ * Chargé en dernier pour personnaliser le thème
  */
-
-/* Variables Bootstrap overrides - thème sombre gris et opaque */
-[data-bs-theme="dark"] {
-  --bs-card-bg: #252a31;
-  --bs-body-bg: #1e2228;
-}
-
-/* Fond gris opaque uniforme */
-html,
-body {
-  min-height: 100%;
-  background: #1e2228 !important;
-}
 
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 
 main,
@@ -26,28 +14,18 @@ main,
   background: transparent !important;
 }
 
-/* Header + Navbar - opaque, même hauteur que footer */
+/* Navbar - hérite de bg-primary (Minty), ajustements légers */
 header {
-  background-color: #171a1e;
-  opacity: 1;
   min-height: 56px;
 }
 
 .navbar-eventbrite {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  background: #171a1e !important;
-  background-color: #171a1e !important;
-  opacity: 1;
-}
-
-.navbar-eventbrite .navbar-collapse {
-  background-color: transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-eventbrite .navbar-brand {
   font-weight: 700;
   font-size: 1.35rem;
-  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .brand-logo {
@@ -56,47 +34,11 @@ header {
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: rgba(0, 0, 0, 0.2);
   color: white;
   font-weight: 800;
   font-size: 0.9rem;
   border-radius: 8px;
-}
-
-.brand-text {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.navbar-eventbrite .nav-link {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.navbar-eventbrite .nav-link:hover {
-  color: #6ea8fe !important;
-}
-
-.navbar-eventbrite .dropdown-menu {
-  margin-top: 0.5rem;
-  padding: 0.5rem 0;
-  background: #171a1e !important;
-  background-color: #171a1e !important;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  opacity: 1;
-}
-
-.navbar-eventbrite .dropdown-menu .dropdown-item {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.navbar-eventbrite .dropdown-menu .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.navbar-eventbrite .dropdown-menu .dropdown-divider {
-  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .navbar-eventbrite .dropdown-menu form {
@@ -108,12 +50,11 @@ header {
   text-align: left;
 }
 
-/* Hero - même rendu que les cards, texte lisible et centré */
+/* Hero - adapté au thème clair Minty (couleur primary mint) */
 .hero-full {
-  background: #252a31 !important;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, var(--bs-primary) 0%, #5ba892 100%);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 0 auto 2rem;
   max-width: calc(100% - 2rem);
 }
@@ -121,7 +62,7 @@ header {
 .hero-full h1 {
   color: #fff !important;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .hero-full .lead {
@@ -132,32 +73,92 @@ header {
   margin-right: auto;
 }
 
+@media (max-width: 575.98px) {
+  .hero-full {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    max-width: none;
+  }
+  .hero-full h1 {
+    font-size: 1.5rem !important;
+  }
+  .hero-full .lead {
+    font-size: 0.95rem;
+  }
+}
+
 .hero-full .btn-primary {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .hero-full .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* Cartes événements - contrastées mais discrètes */
+/* Bannière petite - sous-pages */
+.banner-small {
+  background: linear-gradient(135deg, var(--bs-primary) 0%, #5ba892 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.banner-small-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.banner-small-title {
+  font-size: 1.25rem; /* h4 base */
+}
+
+@media (max-width: 575.98px) {
+  .banner-small-title {
+    font-size: 1rem; /* h5 sur mobile */
+  }
+}
+
+@media (min-width: 768px) {
+  .banner-small-title {
+    font-size: 1.5rem; /* h3 sur desktop */
+  }
+}
+
+/* Cartes participants horizontales */
+.participant-card {
+  transition: box-shadow 0.2s;
+}
+
+.participant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.participant-card .participant-avatar {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+/* Cartes événements - hauteur uniforme */
 .event-card {
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   overflow: hidden;
-  background: #252a31 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 .event-card .card-body {
-  background: #252a31 !important;
+  flex: 1 1 auto;
+}
+
+.event-card .card-text {
+  min-height: 2.5em;
+  line-height: 1.5;
 }
 
 .event-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
 .event-card .card-img-top {
@@ -167,46 +168,29 @@ header {
 
 .event-card .card-img-placeholder {
   height: 200px;
-  background: #2a3038;
+  background: var(--bs-secondary-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--bs-secondary-color);
   font-size: 2.5rem;
 }
 
-/* Flash messages - version sombre */
+/* Alerts */
 .alert {
   border-radius: 0.5rem;
-  border: none;
 }
 
-.alert-success {
-  background: rgba(25, 135, 84, 0.25);
-  color: #75c997;
-}
-
-.alert-danger {
-  background: rgba(220, 53, 69, 0.25);
-  color: #f5a8b0;
-}
-
-.alert-info {
-  background: rgba(13, 202, 240, 0.15);
-  color: #6edff6;
-}
-
-/* Footer - centré et bien rangé */
+/* Footer - fond sombre pour contraste avec page claire */
 .footer-eventbrite {
-  background: #171a1e !important;
-  background-color: #171a1e !important;
-  opacity: 1;
+  background: var(--bs-dark) !important;
+  background-color: var(--bs-dark) !important;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.85);
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-eventbrite .footer-inner {
@@ -225,13 +209,17 @@ header {
 }
 
 .footer-eventbrite .footer-link:hover {
-  color: #6ea8fe;
+  color: #fff;
 }
 
 .footer-eventbrite .footer-info {
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
+}
+
+.footer-eventbrite .footer-info p {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .footer-eventbrite .footer-social-link {
@@ -244,7 +232,7 @@ header {
 }
 
 .footer-eventbrite .footer-social-link:hover {
-  color: #6ea8fe;
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -253,45 +241,23 @@ header {
   height: 24px;
 }
 
-/* Cards générales - contrastées (override Modern Business) */
+/* Cards - Minty gère le style, on garde les coins arrondis */
 .card {
   border-radius: 0.5rem;
-  background: #252a31 !important;
-  background-color: #252a31 !important;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-.card .card-body {
-  background: #252a31 !important;
-  background-color: #252a31 !important;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Profil utilisateur */
 .card .img-thumbnail.rounded-circle {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Formulaires - fond sombre, pas de blanc */
-label,
-.form-label {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Messages d'erreur Devise - lisible en thème sombre */
+/* Messages d'erreur Devise */
 #error_explanation {
-  background: rgba(220, 53, 69, 0.2);
-  border: 1px solid rgba(220, 53, 69, 0.5);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
 }
 
 #error_explanation h2 {
-  color: #f5a8b0 !important;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -301,64 +267,20 @@ label,
   padding-left: 1.25rem;
 }
 
-#error_explanation li {
-  color: #f5a8b0;
-}
-
-.form-control,
-.form-select {
-  background: #1e2228;
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.form-control:focus,
-.form-select:focus {
-  background: #1e2228;
-  border-color: #0d6efd;
-  color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-.form-control::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* List-group - fond gris opaque */
-.list-group-item {
-  background: #1e2228;
-  border-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.list-group-item-action:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Texte principal des pages */
-h1, h2, h3, h4, h5, h6 {
-  color: rgba(255, 255, 255, 0.95);
-}
-
-/* Prochains événements - blanc et centré */
+/* Prochains événements */
 .upcoming-title {
-  color: #fff !important;
   text-align: center !important;
 }
 
-.text-muted {
-  color: rgba(255, 255, 255, 0.55) !important;
-}
-
-/* Boutons avec style */
-.btn-primary {
-  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+/* Boutons - transitions légères */
+.btn-primary,
+.btn-success {
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-success:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
 }
 
 .btn-lg {
@@ -366,48 +288,40 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-.btn-success {
-  box-shadow: 0 2px 4px rgba(25, 135, 84, 0.3);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.btn-success:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(25, 135, 84, 0.4);
-}
-
-/* Liens dans les cartes / formulaires Devise */
-.card a.btn-link,
-.card .btn-link {
-  color: #6ea8fe;
-}
-
-.card a.btn-link:hover,
-.card .btn-link:hover {
-  color: #8fc4ff;
-}
-
-/* Cards améliorées */
+/* Cards événements - détails */
 .event-card .card-body {
   padding: 1.25rem;
 }
 
 .event-card .card-title {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
 }
 
-.event-card .card-text {
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
+/* Commentaires */
+.comments-list .comment-molecule:last-child {
+  border-bottom: none !important;
 }
 
-.event-card .text-muted,
-.event-card .card-text.text-muted {
-  color: rgba(255, 255, 255, 0.55) !important;
+/* Cartes villes */
+.city-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
 }
 
-.event-card .badge-free {
-  background: #198754;
-  font-size: 0.7rem;
+/* Responsive - conteneurs et cartes */
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .event-card .card-img-top,
+  .event-card .card-img-placeholder {
+    height: 160px;
+  }
+  .event-card .card-body {
+    padding: 1rem;
+  }
 }

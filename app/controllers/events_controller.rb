@@ -4,7 +4,9 @@ class EventsController < ApplicationController
   before_action :ensure_event_admin, only: [:edit, :update, :destroy]
 
   def index
-    @events = Event.validated.order(start_date: :asc)
+    @events = Event.validated.with_attached_picture.order(start_date: :asc)
+    @events = @events.where(location: params[:location]) if params[:location].present?
+    @cities = Event.validated.group(:location).count.sort_by { |_, count| -count }.first(6)
   end
 
   def show
@@ -23,9 +25,13 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.admin = current_user
+    if current_user.admin?
+      @event.validated = true
+      @event.reviewed = true
+    end
 
     if @event.save
-      redirect_to @event, notice: t("app.flash.event_created_pending")
+      redirect_to @event, notice: (current_user.admin? ? t("app.flash.event_created") : t("app.flash.event_created_pending")), allow_other_host: true
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +42,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: t("app.flash.event_updated")
+      redirect_to @event, notice: t("app.flash.event_updated"), allow_other_host: true
     else
       render :edit, status: :unprocessable_entity
     end
@@ -58,6 +64,8 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :picture)
+    p = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :picture)
+    p[:price] = 0 if p[:price].to_s.strip.blank?
+    p
   end
 end

@@ -1,7 +1,7 @@
+<%= render "shared/banner_small", title: t("app.attendances.index.title", event: @event.title), image: (@event.picture.attached? ? @event.picture : nil) %>
+
 <div class="row">
   <div class="col-md-10 offset-md-1">
-    <h1 class="h3 mb-4"><%= t("app.attendances.index.title", event: @event.title) %></h1>
-
     <div class="d-flex gap-2 mb-4">
       <%= link_to t("app.events.show.edit_btn"), edit_event_path(@event), class: "btn btn-outline-primary" %>
       <%= button_to t("app.events.show.delete_btn"),
@@ -15,15 +15,10 @@
     <h2 class="h5 mb-3"><%= t("app.attendances.index.participants") %> (<%= @attendances.count %>)</h2>
 
     <% if @attendances.any? %>
-      <div class="list-group mb-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-4">
         <% @attendances.each do |attendance| %>
-          <div class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong><%= attendance.user.first_name.presence || attendance.user.email %></strong>
-              <%= attendance.user.last_name if attendance.user.last_name.present? %>
-              <br>
-              <small class="text-muted"><%= attendance.user.email %></small>
-            </div>
+          <div class="col">
+            <%= render "attendances/participant_card", attendance: attendance %>
           </div>
         <% end %>
       </div>
