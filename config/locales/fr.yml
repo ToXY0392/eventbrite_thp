@@ -104,6 +104,8 @@ fr:
         feature_create_text: "Proposez vos idées, rassemblez votre communauté et partagez vos passions. Créez un événement en quelques clics."
         feature_cta_discover: Découvrir les événements
         feature_cta_create: Créer un événement
+        testimonial_quote: "« EventbriteTHP m'a permis de découvrir des événements incroyables près de chez moi. Une plateforme simple et efficace ! »"
+        testimonial_author: Organisateur passionné
       labels:
         pending_validation: En attente de validation
         date: Date

@@ -4,22 +4,22 @@ A Rails application to manage events like Eventbrite.
 
 ## 📋 Prerequisites
 
-- 💎 Ruby 3.4.2
-- 🐘 PostgreSQL 9.3+
-- 📦 Node.js (optional, for the asset pipeline)
-- 💳 Compte **Stripe** (clés de test pour le paiement)
-- 🖼️ **Active Storage** – images d'événements et avatars utilisateur
-- 🎨 **Bootstrap 5** (thème sombre personnalisé)
+- 💎 **Ruby 3.4.2**
+- 🐘 **PostgreSQL** 9.6+
+- 💳 **Stripe account** – test keys for payment (paid events)
+- 🖼️ **Active Storage** – event images and user avatars
+
+**No Node.js required** – Propshaft (assets) and importmap-rails (JS).
 
 **Main technologies:**
 - 🚂 Rails 8.1
-- 🔐 **Devise** – authentification (sign up, sign in, reset password)
-- 💳 **Stripe** – paiement en ligne (cartes bancaires)
+- 🔐 **Devise** – authentication (sign up, sign in, reset password)
+- 💳 **Stripe** – online payment (credit cards)
 - 📱 **PWA** – Progressive Web App (Rails 8 native)
-- 🎨 **Bootstrap 5** – UI et navbar
-- 📧 **Mailer** – emails (letter_opener en dev pour prévisualisation)
-- 🔧 **Faker** – données de test en français
-- 🐛 **Better Errors** – pages d’erreur avec débogage interactif
+- 🎨 **Bootstrap 5 + Bootswatch Minty** – UI and navbar
+- 📧 **Mailer** – emails (letter_opener in dev for preview)
+- 🔧 **Faker** – test data in French
+- 🐛 **Better Errors** – error pages with interactive debugging
 
 ## ⚙️ Installation
 
@@ -40,10 +40,10 @@ rails db:create
 rails db:migrate
 ```
 
-4. **Configure Stripe** (pour le paiement)
+4. **Configure Stripe** (for payment)
 ```bash
 cp .env.example .env
-# Remplir .env avec vos clés Stripe (https://dashboard.stripe.com/test/apikeys)
+# Fill in .env with your Stripe keys (https://dashboard.stripe.com/test/apikeys)
 ```
 
 5. **Start the server**
@@ -55,31 +55,25 @@ The application will be accessible at `http://localhost:3000`
 
 ## 📝 Project Steps to Complete
 
-Exercice **Eventbrite : Stripe et composants (partials)** – complété ✅
+### Eventbrite Exercise: Stripe and Components ✅
 
-### 1. **Partials** ✅
-- Partials extraits : `_event_card`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`
-- Réutilisés dans index, show, new, edit, users#show
+1. **Partials** ✅ – `_event_card`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`
+2. **Stripe** ✅ – Payment via Checkout, free events without Stripe
+3. **Organizer admin space** ✅ – `attendances#index`, edit/delete event
+4. **Seed & test** ✅ – `rails db:seed`, test card 4242 4242 4242 4242
 
-### 2. **Stripe – Paiement** ✅
-- Gem `stripe` et `dotenv-rails`
-- `config/initializers/stripe.rb`
-- `.env.example` en template (cp .env.example .env puis remplir les clés)
-- Flux : bouton "Rejoindre" → `attendances#new` → `attendances#checkout` (Stripe Checkout) → `attendances#success`
-- Annulation : redirection vers l'événement avec message d'erreur
+### Molecules and Organisms Exercise (Bootswatch Minty) ✅
 
-### 3. **Espace admin organisateur** ✅
-- Lien "Mon espace événement" sur `events#show` (visible uniquement par l’organisateur)
-- `attendances#index` : liste des participants, boutons Modifier / Supprimer l’événement
-- `before_action :ensure_event_admin` pour restreindre l’accès
-
-### 4. **Bonus : Événements gratuits** ✅
-- `price >= 0` dans le modèle Event – méthode `is_free?`
-- Rejoindre directement sans Stripe pour les événements gratuits
-
-### 5. **Seed & test** ✅
-- `rails db:seed` – utilisateurs (password: password123), événements (dont 1 gratuit), attendances
-- À tester : inscription, paiement Stripe (carte test 4242 4242 4242 4242), événement gratuit, espace admin
+5. **Navbar** ✅ – `shared/_navbar`
+6. **Footer** ✅ – `shared/_footer`
+7. **Authentication forms** ✅ – Devise (sign up, sign in, password)
+8. **Banners** ✅ – Hero (home), small banner (sub-pages)
+9. **Cards** ✅ – events, participants (horizontal), cities
+10. **Card lists** ✅ – events grid, participants grid
+11. **Comment** ✅ – molecule `_comment`, organism `_comments_section`
+12. **Resource presentation** ✅ – 8+4 layout on `events#show`
+13. **Image + text block** ✅ – `_feature_block` (element presentation)
+14. **Custom organism** ✅ – Admin dashboard
 
 ## 🏗️ Architecture
 
@@ -87,9 +81,6 @@ Exercice **Eventbrite : Stripe et composants (partials)** – complété ✅
 - 🎮 **Controllers** : HTTP request handling
 - 🎨 **Views** : ERB templates for rendering
 - 🎭 **Assets** : Stylesheets and JavaScript
-
-
-
 
 ## 🚀 Deployment
 

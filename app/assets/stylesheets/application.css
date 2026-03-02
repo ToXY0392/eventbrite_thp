@@ -59,6 +59,12 @@ header {
   max-width: calc(100% - 2rem);
 }
 
+.hero-full.hero-with-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .hero-full h1 {
   color: #fff !important;
   text-align: center;
@@ -324,4 +330,19 @@ header {
   .event-card .card-body {
     padding: 1rem;
   }
+}
+
+/* Blockquote - citations / témoignages */
+.blockquote {
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--bs-primary);
+  background: var(--bs-secondary-bg);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.blockquote-footer {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--bs-secondary);
 }

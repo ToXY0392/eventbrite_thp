@@ -1,6 +1,6 @@
 <% content_for :skip_container do %><% end %>
 <!-- Hero pleine largeur -->
-<section class="hero-full py-3 py-md-5">
+<section class="hero-full hero-with-bg py-3 py-md-5" style="background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.2) 100%), url('<%= asset_path('DSC_2960.jpg') %>');">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 text-center">
@@ -14,6 +14,14 @@
     </div>
   </div>
 </section>
+
+<!-- Témoignage / citation -->
+<div class="container py-4">
+  <blockquote class="blockquote text-center">
+    <p class="mb-2"><%= t("app.events.index.testimonial_quote") %></p>
+    <footer class="blockquote-footer"><%= t("app.events.index.testimonial_author") %></footer>
+  </blockquote>
+</div>
 
 <!-- Bloc image + texte -->
 <div class="py-4">
