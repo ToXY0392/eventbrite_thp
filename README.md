@@ -38,6 +38,7 @@ bundle install
 ```bash
 rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 4. **Configure Stripe** (for payment)
@@ -48,7 +49,7 @@ cp .env.example .env
 
 5. **Start the server**
 ```bash
-bin/dev
+rails s
 ```
 
 The application will be accessible at `http://localhost:3000`
@@ -64,22 +65,32 @@ The application will be accessible at `http://localhost:3000`
 
 ### Molecules and Organisms Exercise (Bootswatch Minty) ✅
 
-5. **Navbar** ✅ – `shared/_navbar`
-6. **Footer** ✅ – `shared/_footer`
-7. **Authentication forms** ✅ – Devise (sign up, sign in, password)
-8. **Banners** ✅ – Hero (home), small banner (sub-pages)
-9. **Cards** ✅ – events, participants (horizontal), cities
-10. **Card lists** ✅ – events grid, participants grid
-11. **Comment** ✅ – molecule `_comment`, organism `_comments_section`
-12. **Resource presentation** ✅ – 8+4 layout on `events#show`
-13. **Image + text block** ✅ – `_feature_block` (element presentation)
-14. **Custom organism** ✅ – Admin dashboard
+5. **Navbar** ✅ – `layouts/_header`
+6. **Footer** ✅ – `layouts/_footer`
+7. **Flash / Alerts** ✅ – `layouts/_flash` with `bootstrap_class_for_flash` helper
+8. **Authentication forms** ✅ – Devise (sign up, sign in, password)
+9. **Banners** ✅ – Hero (`_hero_index`), small banner (`_banner_small`)
+10. **Cards** ✅ – events, participants (horizontal), cities (`_city_card`)
+11. **Card lists** ✅ – events grid (`_events_list`), participants grid (`_participants_section`)
+12. **Comment** ✅ – molecule `_comment`, organism `_comments_section`
+13. **Resource presentation** ✅ – 8+4 layout on `events#show` (`_event_main_card`, `_event_sidebar`)
+14. **Image + text block** ✅ – `_feature_block` (element presentation)
+15. **Custom organism** ✅ – Admin dashboard
+
+### Rails et composants (Partials) ✅
+
+- **Layouts** : `_header`, `_footer`, `_flash` (called from `application.html.erb`)
+- **Shared** : `_hero_index`, `_banner_small`, `_testimonial`, `_feature_block`, `_cities_section`, `_city_card`, `_devise_card`
+- **Events** : `_event_card`, `_event_main_card`, `_event_sidebar`, `_event_details`, `_event_form`, `_event_admin_buttons`, `_event_list_item`, `_events_list`
+- **Users** : `_profile_card`, `_created_events_card`
+- **Attendances** : `_admin_actions`, `_participants_section`, `_event_summary_card`, `_participant_card`
+- **Admin** : `_users_table`, `_events_table`
 
 ## 🏗️ Architecture
 
 - 📊 **Models** : Business logic for events and users
 - 🎮 **Controllers** : HTTP request handling
-- 🎨 **Views** : ERB templates for rendering
+- 🎨 **Views** : ERB templates with partials (component-based)
 - 🎭 **Assets** : Stylesheets and JavaScript
 
 ## 🚀 Deployment
@@ -94,5 +105,5 @@ docker build -t eventbrite_thp .
 ## ✅ Testing
 
 ```bash
-rails s
+rails test
 ```
