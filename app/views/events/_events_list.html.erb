@@ -1,0 +1,26 @@
+<%
+  events = local_assigns[:events] || []
+  location_filter = local_assigns[:location_filter]
+%>
+<div class="container py-3 py-md-5" id="events">
+  <h2 class="upcoming-title h4 fw-semibold mb-4"><%= t("app.events.index.upcoming") %></h2>
+
+  <% if events.any? %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+      <% events.each do |event| %>
+        <div class="col">
+          <%= render "events/event_card", event: event %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-5 rounded-3 border border-secondary bg-light">
+      <p class="text-muted fs-5 mb-0">
+        <%= location_filter.present? ? t("app.events.index.empty_by_location", location: location_filter) : t("app.events.index.empty") %>
+      </p>
+      <% if location_filter.present? %>
+        <%= link_to t("app.events.index.show_all"), root_path, class: "btn btn-outline-primary mt-3" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

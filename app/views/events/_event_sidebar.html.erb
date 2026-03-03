@@ -1,0 +1,33 @@
+<% event = local_assigns[:event] %>
+<div class="card border-0 shadow-sm mb-4 sticky-top">
+  <div class="card-body">
+    <%= render "events/event_details", event: event %>
+
+    <hr class="my-3">
+
+    <% if user_signed_in? %>
+      <% if current_user == event.admin %>
+        <%= link_to t("app.events.show.admin_space"), event_attendances_path(event), class: "btn btn-primary w-100 mb-2" %>
+      <% elsif event.participants.include?(current_user) %>
+        <p class="text-muted mb-2"><%= t("app.events.show.already_joined") %></p>
+      <% else %>
+        <% if event.is_free? %>
+          <%= button_to t("app.events.show.join_btn"),
+                        event_attendances_path(event),
+                        method: :post,
+                        class: "btn btn-success w-100 mb-2" %>
+        <% else %>
+          <%= link_to t("app.events.show.join_btn"),
+                      new_event_attendance_path(event),
+                      class: "btn btn-success w-100 mb-2" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p class="text-muted small mb-2">
+        <%= link_to t("app.nav.sign_in"), new_user_session_path %> <%= t("app.events.show.sign_in_to_join") %>
+      </p>
+    <% end %>
+
+    <%= link_to t("app.events.show.back"), root_path, class: "btn btn-outline-secondary w-100" %>
+  </div>
+</div>

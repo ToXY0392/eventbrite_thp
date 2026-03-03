@@ -1,0 +1,16 @@
+<%
+  attendances = local_assigns[:attendances] || []
+%>
+<h2 class="h5 mb-3"><%= t("app.attendances.index.participants") %> (<%= attendances.count %>)</h2>
+
+<% if attendances.any? %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-4">
+    <% attendances.each do |attendance| %>
+      <div class="col">
+        <%= render "attendances/participant_card", attendance: attendance %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= t("app.attendances.index.empty") %></p>
+<% end %>

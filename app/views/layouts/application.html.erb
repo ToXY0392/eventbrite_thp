@@ -17,23 +17,12 @@
 </head>
 
 <body class="d-flex flex-column" data-turbo="false">
-  <%= render "shared/navbar" %>
+  <%= render "layouts/header" %>
 
   <main class="flex-grow-1">
-    <% if notice || alert %>
+    <% if flash.any? %>
       <div class="container py-2">
-        <% if notice %>
-          <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-            <%= notice %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-        <% end %>
-        <% if alert %>
-          <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-            <%= alert %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-        <% end %>
+        <%= render "layouts/flash" %>
       </div>
     <% end %>
 
@@ -46,14 +35,14 @@
     <% end %>
   </main>
 
-  <%= render "shared/footer" %>
+  <%= render "layouts/footer" %>
 
   <!-- JS Rails + jQuery + Bootstrap (Propshaft : chemin depuis vendor/assets, ordre THP : jQuery → Bootstrap) -->
   <%= javascript_importmap_tags %>
   <%= javascript_include_tag "javascripts/jquery.min", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "javascripts/bootstrap.bundle", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "javascripts/bootstrap_turbo_fix", "data-turbo-track": "reload" %>
-  <% if notice || alert %>
+  <% if flash.any? %>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.alert-dismissible').forEach(function(alert) {

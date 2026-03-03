@@ -9,6 +9,10 @@ class AvatarsController < ApplicationController
       redirect_to root_path, alert: t("app.flash.profile_forbidden", default: "Tu ne peux pas modifier ce profil.") and return
     end
 
+    unless params[:avatar].present?
+      redirect_to user_path(@user), alert: t("app.flash.avatar_missing", default: "Choisissez une image avant d'envoyer.") and return
+    end
+
     @user.avatar.attach(params[:avatar])
     redirect_to user_path(@user),
                 notice: t("app.flash.avatar_updated", default: "Avatar mis à jour.")

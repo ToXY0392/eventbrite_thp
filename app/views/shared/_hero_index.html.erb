@@ -1,0 +1,22 @@
+<%
+  title = local_assigns[:title] || t("app.events.index.title")
+  subtitle = local_assigns[:subtitle] || t("app.events.index.subtitle")
+  image_path = local_assigns[:image_path] || "DSC_2960.jpg"
+  cta_discover = local_assigns[:cta_discover] || t("app.events.index.feature_cta_discover")
+  cta_create = local_assigns[:cta_create] || t("app.events.index.feature_cta_create")
+  cta_create_path = local_assigns[:cta_create_path] || new_event_path
+%>
+<section class="hero-full hero-with-bg py-3 py-md-5" style="background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.2) 100%), url('<%= asset_path(image_path) %>');">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold text-white mb-3"><%= title %></h1>
+        <p class="lead mb-4"><%= subtitle %></p>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <%= link_to cta_discover, "#events", class: "btn btn-light btn-lg px-4" %>
+          <%= link_to cta_create, cta_create_path, class: "btn btn-outline-light btn-lg px-4" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

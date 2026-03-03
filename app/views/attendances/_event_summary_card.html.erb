@@ -1,0 +1,10 @@
+<% event = local_assigns[:event] %>
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class="h5 card-title"><%= event.title %></h2>
+    <p class="card-text"><%= truncate(event.description, length: 200) %></p>
+    <p class="mb-0">
+      <strong><%= t("app.events.labels.price") %> :</strong> <%= event.price %> €
+    </p>
+  </div>
+</div>

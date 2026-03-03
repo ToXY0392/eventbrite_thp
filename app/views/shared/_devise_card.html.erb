@@ -1,0 +1,13 @@
+<%
+  title = local_assigns[:title]
+%>
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-4"><%= title %></h2>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>

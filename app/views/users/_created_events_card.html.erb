@@ -1,0 +1,19 @@
+<%
+  user = local_assigns[:user]
+  created_events = local_assigns[:created_events] || []
+  show_admin_actions = local_assigns[:show_admin_actions]
+%>
+<div class="card border-0 shadow-sm">
+  <div class="card-body">
+    <h3 class="h5 mb-4"><%= t("app.users.show.events_created") %></h3>
+    <% if created_events.any? %>
+      <div class="list-group list-group-flush">
+        <% created_events.each do |event| %>
+          <%= render "events/event_list_item", event: event, show_admin_actions: show_admin_actions %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted mb-0"><%= t("app.users.show.no_events") %></p>
+    <% end %>
+  </div>
+</div>

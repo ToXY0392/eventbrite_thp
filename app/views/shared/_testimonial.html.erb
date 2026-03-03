@@ -1,0 +1,10 @@
+<%
+  quote = local_assigns[:quote] || ""
+  author = local_assigns[:author] || ""
+%>
+<div class="container py-4">
+  <blockquote class="blockquote text-center">
+    <p class="mb-2"><%= quote %></p>
+    <footer class="blockquote-footer"><%= author %></footer>
+  </blockquote>
+</div>

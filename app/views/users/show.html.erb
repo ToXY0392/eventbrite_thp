@@ -4,75 +4,14 @@
 <%= render "shared/banner_small", title: user_display_name, image: @user.avatar_or_default %>
 
 <div class="row">
-  <!-- Colonne avatar + infos -->
   <div class="col-md-4 mb-4">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body text-center">
-
-        <!-- 🔹 Avatar -->
-        <div class="mb-3">
-          <%= image_tag @user.avatar_or_default,
-                        class: "img-thumbnail rounded-circle",
-                        alt: "Avatar utilisateur",
-                        style: "width:120px; height:120px; object-fit:cover;" %>
-        </div>
-
-        <!-- 🔹 Formulaire changement avatar (seulement si on est sur son propre profil) -->
-        <% if user_signed_in? && current_user == @user %>
-          <%= form_tag user_avatars_path(@user), multipart: true, class: "mb-3" do %>
-            <div class="mb-2">
-              <%= file_field_tag :avatar, accept: "image/*",
-                                  class: "form-control form-control-sm" %>
-            </div>
-            <%= submit_tag t("app.users.show.update_avatar", default: "Mettre à jour l’avatar"),
-                            class: "btn btn-sm btn-outline-primary" %>
-          <% end %>
-        <% end %>
-
-        <!-- 🔹 Nom -->
-        <h2 class="card-title h4 mb-3">
-          <%= @user.first_name.presence || t("app.users.show.first_name_default") %>
-          <%= @user.last_name.presence  || t("app.users.show.last_name_default")  %>
-        </h2>
-
-        <!-- 🔹 Email -->
-        <p class="mb-1">
-          <strong><%= t("app.users.show.email") %> :</strong>
-          <%= @user.email %>
-        </p>
-
-        <!-- 🔹 Description -->
-        <p class="mb-3">
-          <strong><%= t("app.users.show.description") %> :</strong><br>
-          <%= @user.description.presence || t("app.users.show.description_default") %>
-        </p>
-
-        <hr>
-
-        <!-- 🔹 Bouton modifier mot de passe -->
-        <%= link_to t("app.users.show.edit_password"),
-                    edit_user_registration_path,
-                    class: "btn btn-outline-primary btn-sm" %>
-
-      </div>
-    </div>
+    <%= render "users/profile_card", user: @user %>
   </div>
 
-  <!-- Colonne events -->
   <div class="col-md-8 mb-4">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body">
-        <h3 class="h5 mb-4"><%= t("app.users.show.events_created") %></h3>
-        <% if @created_events.any? %>
-          <div class="list-group list-group-flush">
-            <% @created_events.each do |event| %>
-              <%= render "events/event_list_item", event: event, show_admin_actions: (user_signed_in? && current_user == @user) %>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="text-muted mb-0"><%= t("app.users.show.no_events") %></p>
-        <% end %>
-      </div>
-    </div>
+    <%= render "users/created_events_card",
+               user: @user,
+               created_events: @created_events,
+               show_admin_actions: (user_signed_in? && current_user == @user) %>
   </div>
 </div>

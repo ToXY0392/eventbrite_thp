@@ -1,72 +1,18 @@
 <% content_for :skip_container do %><% end %>
-<!-- Hero pleine largeur -->
-<section class="hero-full hero-with-bg py-3 py-md-5" style="background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.2) 100%), url('<%= asset_path('DSC_2960.jpg') %>');">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center">
-        <h1 class="display-4 fw-bold text-white mb-3"><%= t("app.events.index.title") %></h1>
-        <p class="lead mb-4"><%= t("app.events.index.subtitle") %></p>
-        <div class="d-flex flex-wrap gap-2 justify-content-center">
-          <%= link_to t("app.events.index.feature_cta_discover"), "#events", class: "btn btn-light btn-lg px-4" %>
-          <%= link_to t("app.events.index.feature_cta_create"), new_event_path, class: "btn btn-outline-light btn-lg px-4" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Témoignage / citation -->
-<div class="container py-4">
-  <blockquote class="blockquote text-center">
-    <p class="mb-2"><%= t("app.events.index.testimonial_quote") %></p>
-    <footer class="blockquote-footer"><%= t("app.events.index.testimonial_author") %></footer>
-  </blockquote>
-</div>
+<%= render "shared/hero_index" %>
 
-<!-- Bloc image + texte -->
-<div class="py-4">
-  <%= render "shared/feature_block",
-             title: t("app.events.index.feature_create_title"),
-             text: t("app.events.index.feature_create_text"),
-             image_left: false,
-             cta_text: t("app.events.index.feature_cta_create"),
-             cta_path: new_event_path %>
-</div>
+<%= render "shared/testimonial",
+           quote: t("app.events.index.testimonial_quote"),
+           author: t("app.events.index.testimonial_author") %>
 
-<!-- Cartes villes -->
-<% if @cities.any? %>
-  <div class="container py-4">
-    <h2 class="h4 fw-semibold mb-4 text-center"><%= t("app.cities.title") %></h2>
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3 justify-content-center">
-      <% @cities.each do |location, count| %>
-        <div class="col">
-          <%= render "shared/city_card", name: location, events_count: count %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+<%= render "shared/feature_block",
+           title: t("app.events.index.feature_create_title"),
+           text: t("app.events.index.feature_create_text"),
+           image_left: false,
+           cta_text: t("app.events.index.feature_cta_create"),
+           cta_path: new_event_path %>
 
-<!-- Contenu principal -->
-<div class="container py-3 py-md-5" id="events">
-  <h2 class="upcoming-title h4 fw-semibold mb-4"><%= t("app.events.index.upcoming") %></h2>
+<%= render "shared/cities_section", cities: @cities %>
 
-  <% if @events.any? %>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
-      <% @events.each do |event| %>
-        <div class="col">
-          <%= render "events/event_card", event: event %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="text-center py-5 rounded-3 border border-secondary bg-light">
-      <p class="text-muted fs-5 mb-0">
-        <%= params[:location].present? ? t("app.events.index.empty_by_location", location: params[:location]) : t("app.events.index.empty") %>
-      </p>
-      <% if params[:location].present? %>
-        <%= link_to t("app.events.index.show_all"), root_path, class: "btn btn-outline-primary mt-3" %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<%= render "events/events_list", events: @events, location_filter: params[:location] %>

@@ -62,6 +62,8 @@ fr:
       event_destroyed: L'événement a été supprimé.
       event_forbidden: Vous ne pouvez pas modifier ou supprimer cet événement.
       profile_forbidden: Vous n'avez pas accès à ce profil.
+      avatar_updated: Avatar mis à jour.
+      avatar_missing: Choisissez une image avant d'envoyer.
       attendance_created: Vous êtes inscrit à cet événement !
     comments:
       title: Commentaires
