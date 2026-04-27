@@ -24,7 +24,7 @@ gem "dotenv-rails", groups: [:development, :test]
 gem "stripe"
 
 # Serveur web conseillé pour Rails
-gem "puma", "~> 7.2"
+gem "puma", "~> 8.0"
 
 # Amélioration du temps de boot
 gem "bootsnap", require: false
